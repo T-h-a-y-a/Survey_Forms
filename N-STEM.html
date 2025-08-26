@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N-STEM Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ACTFL Form -->
+    <form id="actflForm" class="card">
+      <div class="form-header">
+        <h2>N-STEM Form</h2>
+        <div class="form-actions">
+          <button type="button" id="downloadBtn" class="btn ghost">
+            N-STEM (Download Excel)
+          </button>
+        </div>
+      </div>
+      <div class="datass">
+        <label class="labels">SurveyYear:</label>
+        <div class="static-data">
+          <span>2026</span>
+          <!-- Static value -->
+        </div>
+      </div>
+
+      <div class="datass">
+        <label class="labels">SurveyType:</label>
+        <div class="static-data">
+          <span>HX</span>
+          <!-- Static value -->
+        </div>
+      </div>
+      <hr />
+      <div class="datas-groupss">
+        <div class="datas">
+          <label class="labels"
+            >EVID:
+            <input type="text" maxlength="9" name="evid" />
+          </label>
+        </div>
+        <div class="datas">
+          <label class="labels"
+            >Form:
+            <input type="number" maxlength="5" name="form" />
+          </label>
+        </div>
+      </div>
+
+      <label class="labels"
+        >First Name:
+        <input type="text" name="firstName" />
+      </label>
+
+      <label class="labels"
+        >Last Name:
+        <input type="text" name="lastName" />
+      </label>
+
+      <label class="labels"
+        >Home Address:
+        <input type="text" name="homeAddress" />
+      </label>
+
+      <label class="labels"
+        >City:
+        <input type="text" name="city" />
+      </label>
+
+      <label class="labels"
+        >State:
+        <input type="text" name="state" />
+      </label>
+
+      <label class="labels"
+        >Zip Code:
+        <input type="number" name="zipCode" />
+      </label>
+
+      <label class="labels"
+        >Personal Email:
+        <input type="email" name="personalEmail" />
+      </label>
+
+      <label class="birth-label labels">Birth Date:</label>
+      <div class="dob">
+        <div class="dob-col">
+          <small>Month</small>
+          <input type="text" name="birthMonth" maxlength="2" placeholder="MM" />
+        </div>
+        <div class="dob-col">
+          <small>Day</small>
+          <input type="text" name="birthDay" maxlength="2" placeholder="DD" />
+        </div>
+        <div class="dob-col">
+          <small>Year</small>
+          <input
+            type="text"
+            name="birthYear"
+            maxlength="4"
+            placeholder="YYYY"
+          />
+        </div>
+      </div>
+
+      <div class="datas">
+        <label class="labels">High School Graduation Year:</label>
+        <div class="choicess inline">
+          <select name="gradYear">
+            <option value=""></option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+            <option value="2031">2031</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="datas">
+        <label class="labels">Grade Average:</label>
+        <div class="choicess inline">
+          <select name="gradeAvg">
+            <option value=""></option>
+            <option value="A+">A+</option>
+            <option value="A">A</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="B-">B-</option>
+            <option value="C+">C+</option>
+            <option value="C">C</option>
+            <option value="C-">C-</option>
+            <option value="Lower than C">Lower than C</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="datas">
+        <label class="labels">Gender:</label>
+        <div class="choicess inline">
+          <select name="gender">
+            <option value=""></option>
+            <option value="M">M (Male)</option>
+            <option value="F">F (Female)</option>
+            <option value="A">A (Another)</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="labels"
+        >Teacher Last Name:
+        <input type="text" name="teacherLastName" />
+      </label>
+
+      <label class="labels"
+        >Parent/Guardian Email:
+        <input type="email" name="parentEmail" />
+      </label>
+
+      <!-- Q1-Q12 -->
+      <label class="labels">Q1:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q1" value="A" />A</label>
+        <label><input type="checkbox" name="q1" value="B" />B</label>
+        <label><input type="checkbox" name="q1" value="C" />C</label>
+      </div>
+
+      <label class="labels">Q2:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q2" value="A" />A</label>
+        <label><input type="checkbox" name="q2" value="B" />B</label>
+        <label><input type="checkbox" name="q2" value="C" />C</label>
+        <label><input type="checkbox" name="q2" value="D" />D</label>
+      </div>
+
+      <label class="labels">Q3:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q3" value="A" />A</label>
+        <label><input type="checkbox" name="q3" value="B" />B</label>
+        <label><input type="checkbox" name="q3" value="C" />C</label>
+        <label><input type="checkbox" name="q3" value="D" />D</label>
+      </div>
+
+      <label class="labels">Q4:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q4" value="A" />A</label>
+        <label><input type="checkbox" name="q4" value="B" />B</label>
+        <label><input type="checkbox" name="q4" value="C" />C</label>
+        <label><input type="checkbox" name="q4" value="D" />D</label>
+        <label><input type="checkbox" name="q4" value="E" />E</label>
+        <label><input type="checkbox" name="q4" value="F" />F</label>
+      </div>
+
+      <label class="labels">Q5:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q5" value="A" />A</label>
+        <label><input type="checkbox" name="q5" value="B" />B</label>
+        <label><input type="checkbox" name="q5" value="C" />C</label>
+      </div>
+      <label class="labels">Q6:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q6" value="A" />A</label>
+        <label><input type="checkbox" name="q6" value="B" />B</label>
+        <label><input type="checkbox" name="q6" value="C" />C</label>
+      </div>
+
+        <label class="labels">Q7:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q7" value="A" />A</label>
+        <label><input type="checkbox" name="q7" value="B" />B</label>
+        <label><input type="checkbox" name="q7" value="C" />C</label>
+        <label><input type="checkbox" name="q7" value="D" />D</label>
+        <label><input type="checkbox" name="q7" value="E" />E</label>
+        <label><input type="checkbox" name="q7" value="F" />F</label>
+      </div>
+      
+      <label class="labels">Q8:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q8" value="A" />A (Yes)</label>
+        <label><input type="checkbox" name="q8" value="B" />B (No)</label>
+      </div>
+
+         <label class="labels">Q9:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q9" value="A" />A</label>
+        <label><input type="checkbox" name="q9" value="B" />B</label>
+        <label><input type="checkbox" name="q9" value="C" />C</label>
+        <label><input type="checkbox" name="q9" value="D" />D</label>
+        <label><input type="checkbox" name="q9" value="E" />E</label>
+        <label><input type="checkbox" name="q9" value="F" />F</label>
+        <label><input type="checkbox" name="q9" value="G" />G</label>
+        <label><input type="checkbox" name="q9" value="H" />H</label>
+      </div>
+
+
+
+      <label class="labels">Q10:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q10" value="A" />A</label>
+        <label><input type="checkbox" name="q10" value="B" />B</label>
+        <label><input type="checkbox" name="q10" value="C" />C</label>
+        <label><input type="checkbox" name="q10" value="D" />D</label>
+        <label><input type="checkbox" name="q10" value="E" />E</label>
+        <label><input type="checkbox" name="q10" value="F" />F</label>
+        <label><input type="checkbox" name="q10" value="G" />G</label>
+        <label><input type="checkbox" name="q10" value="H" />H</label>
+      </div>
+
+      <label class="labels">Q11:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q11" value="A" />A</label>
+        <label><input type="checkbox" name="q11" value="B" />B</label>
+        <label><input type="checkbox" name="q11" value="C" />C</label>
+        <label><input type="checkbox" name="q11" value="D" />D</label>
+        <label><input type="checkbox" name="q11" value="E" />E</label>
+        <label><input type="checkbox" name="q11" value="F" />F</label>
+        <label><input type="checkbox" name="q11" value="G" />G</label>
+        <label><input type="checkbox" name="q11" value="H" />H</label>
+        <label><input type="checkbox" name="q11" value="I" />I</label>
+        <label><input type="checkbox" name="q11" value="J" />J</label>
+        <label><input type="checkbox" name="q11" value="K" />K</label>
+        <label><input type="checkbox" name="q11" value="L" />L</label>
+      </div>
+      <label class="labels">Q12:</label>
+      <div class="choices inline">
+        <label><input type="checkbox" name="q12" value="A" />A</label>
+        <label><input type="checkbox" name="q12" value="B" />B</label>
+        <label><input type="checkbox" name="q12" value="C" />C</label>
+        <label><input type="checkbox" name="q12" value="D" />D</label>
+        <label><input type="checkbox" name="q12" value="E" />E</label>
+        <label><input type="checkbox" name="q12" value="F" />F</label>
+        <label><input type="checkbox" name="q12" value="G" />G</label>
+        <label><input type="checkbox" name="q12" value="H" />H</label>
+        <label><input type="checkbox" name="q12" value="I" />I</label>
+        <label><input type="checkbox" name="q12" value="J" />J</label>
+        <label><input type="checkbox" name="q12" value="K" />K</label>
+        <label><input type="checkbox" name="q12" value="L" />L</label>
+        <label><input type="checkbox" name="q12" value="M" />M</label>
+        <label><input type="checkbox" name="q12" value="N" />N</label>
+        <label><input type="checkbox" name="q12" value="O" />O</label>
+        <label><input type="checkbox" name="q12" value="P" />P</label>
+        <label><input type="checkbox" name="q12" value="Q" />Q</label>
+        <label><input type="checkbox" name="q12" value="R" />R</label>
+        <label><input type="checkbox" name="q12" value="S" />S</label>
+      </div>
+
+      <!-- Q11 -->
+      <label class="labels">Q13:</label>
+      <div class="q13">
+        <div class="q13-row">
+          <span class="q-num">1.</span>
+          <input type="text" name="q13_1a" class="qbox" maxlength="2" />
+        </div>
+        <div class="q13-row">
+          <span class="q-num">2.</span>
+          <input type="text" name="q13_2a" class="qbox" maxlength="2" />
+        </div>
+        <div class="q13-row">
+          <span class="q-num">3.</span>
+          <input type="text" name="q13_3a" class="qbox" maxlength="2" />
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <label class="labels">Q14:</label>
+      <table class="q14" border="1">
+        <colgroup>
+          <col style="width: 8%" />
+          <col style="width: 54%" />
+          <col style="width: 22%" />
+          <col style="width: 16%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>College Name</th>
+            <th>State</th>
+            <th>This College?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><input type="text" name="college1" /></td>
+            <td><input type="text" name="state1" /></td>
+            <td>
+              <div class="yn">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college1Yes"
+                    value="Yes"
+                  />Yes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college1No"
+                    value="No"
+                  />No</label
+                >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><input type="text" name="college2" /></td>
+            <td><input type="text" name="state2" /></td>
+            <td>
+              <div class="yn">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college2Yes"
+                    value="Yes"
+                  />Yes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college2No"
+                    value="No"
+                  />No</label
+                >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><input type="text" name="college3" /></td>
+            <td><input type="text" name="state3" /></td>
+            <td>
+              <div class="yn">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college3Yes"
+                    value="Yes"
+                  />Yes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college3No"
+                    value="No"
+                  />No</label
+                >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><input type="text" name="college4" /></td>
+            <td><input type="text" name="state4" /></td>
+            <td>
+              <div class="yn">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college4Yes"
+                    value="Yes"
+                  />Yes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college4No"
+                    value="No"
+                  />No</label
+                >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><input type="text" name="college5" /></td>
+            <td><input type="text" name="state5" /></td>
+            <td>
+              <div class="yn">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college5Yes"
+                    value="Yes"
+                  />Yes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="college5No"
+                    value="No"
+                  />No</label
+                >
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Q15 -->
+      <label class="labels">Q15:</label>
+      <div id="q15" class="q15">
+        <div class="q15-row">
+          <input type="number" name="q15_1" maxlength="2" class="qbox" />
+          <input type="number" name="q15_2" maxlength="2" class="qbox" />
+          <input type="number" name="q15_3" maxlength="2" class="qbox" />
+        </div>
+      </div>
+
+      <!-- Q16 -->
+      <label class="labels">Q16:</label>
+      <div class="choices wrap">
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="A" />A</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="B" />B</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="C" />C</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="D" />D</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="E" />E</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="F" />F</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="G" />G</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="H" />H</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="I" />I</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="J" />J</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="K" />K</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="L" />L</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="M" />M</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="N" />N</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="O" />O</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="P" />P</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="Q" />Q</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="R" />R</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="S" />S</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q16" value="T" />T</label
+        >
+      </div>
+
+
+      <label class="labels">Q17:</label>
+      <div class="choices wrap">
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="A" />A</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="B" />B</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="C" />C</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="D" />D</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="E" />E</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="F" />F</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="G" />G</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="H" />H</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="I" />I</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="J" />J</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="K" />K</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q17" value="L" />L</label
+        >
+         <label class="opt"
+          ><input type="checkbox" name="q17" value="M" />M</label
+        >
+         <label class="opt"
+          ><input type="checkbox" name="q17" value="N" />N</label
+        >
+         <label class="opt"
+          ><input type="checkbox" name="q17" value="O" />O</label
+        >
+         <label class="opt"
+          ><input type="checkbox" name="q17" value="P" />P</label
+        >
+         <label class="opt"
+          ><input type="checkbox" name="q17" value="Q" />Q</label
+        >
+      </div>
+
+
+      <!-- Q18 -->
+      <label class="labels">Q18:</label>
+   <div class="choices wrap">
+    <!-- A–Z -->
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="A" />A</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="B" />B</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="C" />C</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="D" />D</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="E" />E</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="F" />F</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="G" />G</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="H" />H</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="I" />I</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="J" />J</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="K" />K</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="L" />L</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="M" />M</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="N" />N</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="O" />O</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="P" />P</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="Q" />Q</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="R" />R</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="S" />S</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="T" />T</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="U" />U</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="V" />V</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="W" />W</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="X" />X</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="Y" />Y</label
+    >
+    <label class="opt"
+     ><input type="checkbox" name="q18" value="Z" />Z</label
+    >
+   </div>
+
+
+      <!-- Q19 -->
+      <label class="labels">Q19:</label>
+      <div class="choices wrap">
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="A" />A</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="B" />B</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="C" />C</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="D" />D</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="E" />E</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="F" />F</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q19" value="G" />G</label
+        >
+      </div>
+
+      <!-- Q20 -->
+      <label class="labels"
+        >Q20:
+        <input type="text" name="q20" />
+      </label>
+
+      <!-- Q21 -->
+      <div class="datas">
+        <label class="labels">Q21:</label>
+        <div class="choices inline">
+          <select name="q21">
+            <option value=""></option>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button id="submitBtn" type="submit" class="btn">Submit</button>
+        <button id="cancelEditBtn" type="button" class="btn ghost" hidden>
+          Cancel Edit
+        </button>
+      </div>
+    </form>
+
+    <!-- Entries List -->
+    <section class="entries card">
+      <h3>Submitted Entries</h3>
+      <div id="entriesList" class="entries-list" aria-live="polite"></div>
+    </section>
+
+    <!-- SheetJS for Excel export -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <script>
+      // --- State ---
+      const form = document.getElementById("actflForm");
+      const entriesList = document.getElementById("entriesList");
+      const submitBtn = document.getElementById("submitBtn");
+      const cancelEditBtn = document.getElementById("cancelEditBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      let entries = [];
+      let editIndex = null;
+
+      // --- Serialize Form ---
+      function serializeForm(f) {
+        const data = {};
+        const elements = Array.from(f.elements).filter((el) => el.name);
+
+        // Manually add static values for SurveyYear and SurveyType
+        data["SurveyYear"] = "2026"; // Static value for SurveyYear
+        data["SurveyType"] = "HX"; // Static value for SurveyType
+
+        elements.forEach((el) => {
+          if (el.type === "checkbox") {
+            if (!data[el.name]) data[el.name] = [];
+            if (el.checked) data[el.name].push(el.value);
+          } else if (
+            el.tagName === "SELECT" ||
+            ["text", "email", "number"].includes(el.type)
+          ) {
+            data[el.name] = el.value.trim();
+          }
+        });
+
+        return data;
+      }
+
+      // --- Build Q15 (1..72) once ---
+      function buildQ15() {
+        const box = document.getElementById("q15Checkboxes");
+        const frag = document.createDocumentFragment();
+        for (let i = 1; i <= 72; i++) {
+          const lbl = document.createElement("label");
+          lbl.className = "opt";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.name = "q15";
+          cb.value = String(i);
+          lbl.appendChild(cb);
+          lbl.appendChild(document.createTextNode(String(i)));
+          frag.appendChild(lbl);
+        }
+        box.appendChild(frag);
+      }
+
+      // --- Fill Form with Data ---
+      function fillForm(data) {
+        form.reset();
+        // set simple inputs/selects
+        for (const [name, value] of Object.entries(data)) {
+          const controls = form.querySelectorAll(
+            `[name="${CSS.escape(name)}"]`
+          );
+          if (!controls.length) continue;
+          const isArray = Array.isArray(value);
+          controls.forEach((ctrl) => {
+            if (ctrl.type === "checkbox") {
+              ctrl.checked = isArray
+                ? value.includes(ctrl.value)
+                : value === ctrl.value;
+            } else if (
+              ctrl.tagName === "SELECT" ||
+              ["text", "email", "number"].includes(ctrl.type)
+            ) {
+              ctrl.value = isArray ? value.join(", ") : value;
+            }
+          });
+        }
+        submitBtn.textContent = "Update";
+        cancelEditBtn.hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // --- Reset Form ---
+      function resetForm() {
+        form.reset();
+        editIndex = null;
+        submitBtn.textContent = "Submit";
+        cancelEditBtn.hidden = true;
+      }
+
+      // --- Render Entries ---
+      function renderEntries() {
+        entriesList.innerHTML = "";
+        if (!entries.length) {
+          entriesList.innerHTML =
+            '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
+          return;
+        }
+
+        entries.forEach((entry, idx) => {
+          const card = document.createElement("details");
+          card.className = "entry";
+          if (idx === entries.length - 1) card.open = true;
+
+          const title = document.createElement("summary");
+          const first = entry.firstName || "";
+          const last = entry.lastName || "";
+          title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
+          card.appendChild(title);
+
+          const grid = document.createElement("div");
+          grid.className = "kv";
+
+          // Show all key-value pairs, including static data
+          const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
+          for (const key of keys) {
+            const k = document.createElement("div");
+            k.className = "k";
+            k.textContent = key;
+            const v = document.createElement("div");
+            v.className = "v";
+            const val = Array.isArray(entry[key])
+              ? entry[key].join(", ")
+              : entry[key];
+            v.textContent = val ?? "";
+            grid.appendChild(k);
+            grid.appendChild(v);
+          }
+
+          const actions = document.createElement("div");
+          actions.className = "row-actions";
+          const editBtn = document.createElement("button");
+          editBtn.type = "button";
+          editBtn.className = "btn sm";
+          editBtn.textContent = "Edit";
+          editBtn.onclick = () => {
+            editIndex = idx;
+            fillForm(entries[idx]);
+          };
+
+          const delBtn = document.createElement("button");
+          delBtn.type = "button";
+          delBtn.className = "btn sm danger";
+          delBtn.textContent = "Delete";
+          delBtn.onclick = () => {
+            entries.splice(idx, 1);
+            renderEntries();
+            resetForm();
+          };
+
+          actions.appendChild(editBtn);
+          actions.appendChild(delBtn);
+
+          card.appendChild(grid);
+          card.appendChild(actions);
+          entriesList.appendChild(card);
+        });
+      }
+
+      // --- Export Entries to Excel ---
+      function toExcel() {
+        if (!entries.length) {
+          alert("No entries to download.");
+          return;
+        }
+
+        // Flatten arrays to strings for Excel
+        const flat = entries.map((obj) => {
+          const out = {};
+          // Manually include static values in the export
+          out["SurveyYear"] = "2026"; // Static value for SurveyYear
+          out["SurveyType"] = "HX"; // Static value for SurveyType
+          for (const [k, v] of Object.entries(obj)) {
+            out[k] = Array.isArray(v) ? v.join(", ") : v;
+          }
+          return out;
+        });
+
+        // Ensure stable columns (union of keys)
+        const cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
+        const normalized = flat.map((o) => {
+          const r = {};
+          cols.forEach((c) => (r[c] = o[c] ?? ""));
+          return r;
+        });
+
+        const ws = XLSX.utils.json_to_sheet(normalized, { header: cols });
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "N-STEM Entries");
+
+        const pad = (n) => String(n).padStart(2, "0");
+        const d = new Date();
+        const fname = `N-STEM_Submissions_${d.getFullYear()}${pad(
+          d.getMonth() + 1
+        )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
+
+        XLSX.writeFile(wb, fname);
+      }
+
+      // --- Events ---
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = serializeForm(form);
+
+        console.log(data); // This will log the serialized data to the console. Ensure SurveyYear and SurveyType are there.
+
+        if (editIndex !== null) {
+          entries[editIndex] = data;
+        } else {
+          entries.push(data);
+        }
+        renderEntries(); // Re-render the entries list to display updated data
+        resetForm(); // Reset the form for the next entry
+      });
+
+      cancelEditBtn.addEventListener("click", resetForm);
+      downloadBtn.addEventListener("click", toExcel);
+
+      // init
+      buildQ15();
+      renderEntries();
+    </script>
+  </body>
+</html>

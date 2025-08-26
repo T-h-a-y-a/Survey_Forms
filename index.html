@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1750714 - Data Entry from Survey Forms - Q & A</title>
+    <style>
+        /* Centering the content */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ebe5e573;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        select {
+            padding: 10px;
+            margin-top: 10px;
+            width: 200px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        h2 {
+            padding-bottom: 2%;
+        }
+        button{
+            color: white;
+            background: #000;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            color: white;
+            background: rgb(76, 207, 76);
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>1750714 - Data Entry from Survey Forms - Q & A</h2>
+        <h3>Select your Form Type</h3>
+
+        <!-- Dropdown menu -->
+        <select id="dropdownMenu">
+            <option value="">Select a form Carefully</option>
+            <option value="N-ACTFL.html">N-ACTFL</option>
+            <option value="N-ART.html">N-ART</option>
+            <option value="N-DECA.html">N-DECA</option>
+            <option value="N-FBLA.html">N-FBLA</option>
+            <option value="N-FCCLA.html">N-FCCLA</option>
+            <option value="N-JROTC.html">N-JROTC</option>
+            <option value="N-MCO.html">N-MOC</option>
+            <option value="N-NCSS.html">N-NCSS</option>
+            <option value="N-STEM.html">N-STEM</option>
+        </select>
+
+        <!-- Submit button -->
+        <button onclick="openPage()">Submit</button>
+    </div>
+
+    <script>
+        function openPage() {
+            var selectedValue = document.getElementById('dropdownMenu').value;
+            if (selectedValue) {
+                window.open(selectedValue, '_blank');  // Open the page in a new tab
+            } else {
+                alert("Please select a page.");
+            }
+        }
+    </script>
+
+</body>
+</html>
