@@ -783,16 +783,7 @@
 
       let entries = [];
       let editIndex = null;
-      (function () {
-  function pad2(n){ return String(n).padStart(2,'0'); }
-  const sels = document.querySelectorAll('.q15sel');
-  const options = ['<option value=""></option>']
-    .concat(Array.from({length:72}, (_,i) => {
-      const v = pad2(i+1);
-      return `<option value="${v}">${v}</option>`;
-    })).join('');
-  sels.forEach(sel => sel.innerHTML = options);
-})();
+      
       (function () {
         const monthSel = document.getElementById("birthMonth");
         const daySel = document.getElementById("birthDay");
@@ -1047,4 +1038,5 @@
     </script>
   </body>
 </html>
+
 
