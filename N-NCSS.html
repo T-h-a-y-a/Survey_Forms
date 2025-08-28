@@ -43,7 +43,7 @@
         <div class="datas">
           <label class="labels"
             >Form:
-            <input type="number" maxlength="5" name="form" />
+            <input type="text" maxlength="5" name="form" />
           </label>
         </div>
       </div>
@@ -431,12 +431,19 @@
       <!-- Q15 -->
       <label class="labels">Q13:</label>
       <div id="q15" class="q15">
-        <div class="q15-row">
-          <input type="number" name="q13_1" maxlength="2" class="qbox" />
-          <input type="number" name="q13_2" maxlength="2" class="qbox" />
-          <input type="number" name="q13_3" maxlength="2" class="qbox" />
-        </div>
-      </div>
+  <div class="q15-row">
+    <input name="q13_1" class="qbox q15in" type="text"
+           inputmode="numeric" maxlength="2" placeholder="01"
+           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
+    <input name="q13_2" class="qbox q15in" type="text"
+           inputmode="numeric" maxlength="2" placeholder="01"
+           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
+    <input name="q13_3" class="qbox q15in" type="text"
+           inputmode="numeric" maxlength="2" placeholder="01"
+           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
+  </div>
+  <small class="muted">Enter two digits only (01–72).</small>
+</div>
 
       <!-- Q16 -->
       <label class="labels">Q14:</label>
@@ -768,34 +775,49 @@
           return new Date(yr, m, 0).getDate(); // m is 1..12
         }
         function refreshDays() {
-          daySel.innerHTML = '<option value="">DD</option>';
-          const m = parseInt(monthSel.value, 10);
-          if (!m) {
-            daySel.disabled = true;
-            return;
-          }
-          const count = daysInMonth(m, yearInp.value);
-          for (let d = 1; d <= count; d++) {
-            const v = pad2(d);
-            const opt = document.createElement("option");
-            opt.value = v;
-            opt.textContent = v;
-            daySel.appendChild(opt);
-          }
-          daySel.disabled = false;
-        }
+    if (!daySel) return;
+    daySel.innerHTML = '<option value="">DD</option>';
+    const m = parseInt(monthSel.value, 10);
+    if (!m) { daySel.disabled = true; return; }
+    const count = daysInMonth(m, yearInp.value);
+    for (let d = 1; d <= count; d++) {
+      const v = pad2(d);
+      const opt = document.createElement("option");
+      opt.value = v; opt.textContent = v;
+      daySel.appendChild(opt);
+    }
+    daySel.disabled = false;
+  }
 
-        monthSel.addEventListener("change", refreshDays);
-        yearInp.addEventListener("input", () => {
-          if (monthSel.value === "02") refreshDays();
-        });
+  if (monthSel && daySel && yearInp) {
+    monthSel.addEventListener("change", refreshDays);
+    yearInp.addEventListener("input", () => { if (monthSel.value === "02") refreshDays(); });
+    document.addEventListener("DOMContentLoaded", () => { if (monthSel.value) refreshDays(); });
+  }
+})();
 
-        // If Month prefilled (e.g., during Edit)
-        document.addEventListener("DOMContentLoaded", () => {
-          if (monthSel.value) refreshDays();
-        });
-      })();
+// ====== Q15 validation: only 01–72 in three text boxes ======
+const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
 
+function attachQ15Validation() {
+  const inputs = document.querySelectorAll("#q15 .q15in");
+  inputs.forEach((inp) => {
+    // keep only digits, limit to 2, live validity
+    inp.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
+      const v = e.target.value;
+      if (!v) { e.target.setCustomValidity(""); return; }
+      e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
+    });
+    // auto-pad single digit to 0X on blur
+    inp.addEventListener("blur", (e) => {
+      const v = e.target.value;
+      if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
+      const ok = !e.target.value || Q15_REGEX.test(e.target.value);
+      e.target.setCustomValidity(ok ? "" : "Enter 01–72");
+    });
+  });
+}
       // --- Serialize Form ---
       function serializeForm(f) {
         const data = {};
@@ -821,128 +843,96 @@
       }
 
       // --- Build Q15 (1..72) once ---
-      function buildQ15() {
-        const box = document.getElementById("q15Checkboxes");
-        if (!box) return; // skip if that container is not used on this version
-        const frag = document.createDocumentFragment();
-        for (let i = 1; i <= 72; i++) {
-          const lbl = document.createElement("label");
-          lbl.className = "opt";
-          const cb = document.createElement("input");
-          cb.type = "checkbox";
-          cb.name = "q15";
-          cb.value = String(i);
-          lbl.appendChild(cb);
-          lbl.appendChild(document.createTextNode(String(i)));
-          frag.appendChild(lbl);
-        }
-        box.appendChild(frag);
-      }
+      // function buildQ15() {
+      //   const box = document.getElementById("q15Checkboxes");
+      //   if (!box) return; // skip if that container is not used on this version
+      //   const frag = document.createDocumentFragment();
+      //   for (let i = 1; i <= 72; i++) {
+      //     const lbl = document.createElement("label");
+      //     lbl.className = "opt";
+      //     const cb = document.createElement("input");
+      //     cb.type = "checkbox";
+      //     cb.name = "q15";
+      //     cb.value = String(i);
+      //     lbl.appendChild(cb);
+      //     lbl.appendChild(document.createTextNode(String(i)));
+      //     frag.appendChild(lbl);
+      //   }
+      //   box.appendChild(frag);
+      // }
 
       // --- Fill Form with Data ---
       function fillForm(data) {
-        form.reset();
-        // set simple inputs/selects
-        for (const [name, value] of Object.entries(data)) {
-          const controls = form.querySelectorAll(
-            `[name="${CSS.escape(name)}"]`
-          );
-          if (!controls.length) continue;
-          const isArray = Array.isArray(value);
-          controls.forEach((ctrl) => {
-            if (ctrl.type === "checkbox") {
-              ctrl.checked = isArray
-                ? value.includes(ctrl.value)
-                : value === ctrl.value;
-            } else if (
-              ctrl.tagName === "SELECT" ||
-              ["text", "email", "number"].includes(ctrl.type)
-            ) {
-              ctrl.value = isArray ? value.join(", ") : value;
-            }
-          });
-        }
-        submitBtn.textContent = "Update";
-        cancelEditBtn.hidden = false;
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  form.reset();
+  for (const [name, value] of Object.entries(data)) {
+    const controls = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+    if (!controls.length) continue;
+    const isArray = Array.isArray(value);
+    controls.forEach((ctrl) => {
+      if (ctrl.type === "checkbox") {
+        ctrl.checked = isArray ? value.includes(ctrl.value) : value === ctrl.value;
+      } else if (ctrl.tagName === "SELECT" || ["text", "email", "number", "hidden"].includes(ctrl.type)) {
+        ctrl.value = isArray ? value.join(", ") : value;
       }
+    });
+  }
+  submitBtn.textContent = "Update";
+  cancelEditBtn.hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-      // --- Reset Form ---
-      function resetForm() {
-        form.reset();
-        editIndex = null;
-        submitBtn.textContent = "Submit";
-        cancelEditBtn.hidden = true;
-      }
+function resetForm() {
+  form.reset();
+  editIndex = null;
+  submitBtn.textContent = "Submit";
+  cancelEditBtn.hidden = true;
+}
 
-      // --- Render Entries ---
-      function renderEntries() {
-        entriesList.innerHTML = "";
-        if (!entries.length) {
-          entriesList.innerHTML =
-            '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
-          return;
-        }
+// ====== Render entries list ======
+function renderEntries() {
+  entriesList.innerHTML = "";
+  if (!entries.length) {
+    entriesList.innerHTML = '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
+    return;
+  }
 
-        entries.forEach((entry, idx) => {
-          const card = document.createElement("details");
-          card.className = "entry";
-          if (idx === entries.length - 1) card.open = true;
+  entries.forEach((entry, idx) => {
+    const card = document.createElement("details");
+    card.className = "entry";
+    if (idx === entries.length - 1) card.open = true;
 
-          const title = document.createElement("summary");
-          const first = entry.firstName || "";
-          const last = entry.lastName || "";
-          title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
-          card.appendChild(title);
+    const title = document.createElement("summary");
+    const first = entry.firstName || "";
+    const last = entry.lastName || "";
+    title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
+    card.appendChild(title);
 
-          const grid = document.createElement("div");
-          grid.className = "kv";
+    const grid = document.createElement("div");
+    grid.className = "kv";
 
-          // Show all key-value pairs, including static data
-          const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
-          for (const key of keys) {
-            const k = document.createElement("div");
-            k.className = "k";
-            k.textContent = key;
-            const v = document.createElement("div");
-            v.className = "v";
-            const val = Array.isArray(entry[key])
-              ? entry[key].join(", ")
-              : entry[key];
-            v.textContent = val ?? "";
-            grid.appendChild(k);
-            grid.appendChild(v);
-          }
+    const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
+    for (const key of keys) {
+      const k = document.createElement("div"); k.className = "k"; k.textContent = key;
+      const v = document.createElement("div"); v.className = "v";
+      const val = Array.isArray(entry[key]) ? entry[key].join(", ") : entry[key];
+      v.textContent = val ?? "";
+      grid.appendChild(k); grid.appendChild(v);
+    }
 
-          const actions = document.createElement("div");
-          actions.className = "row-actions";
-          const editBtn = document.createElement("button");
-          editBtn.type = "button";
-          editBtn.className = "btn sm";
-          editBtn.textContent = "Edit";
-          editBtn.onclick = () => {
-            editIndex = idx;
-            fillForm(entries[idx]);
-          };
+    const actions = document.createElement("div");
+    actions.className = "row-actions";
+    const editBtn = document.createElement("button");
+    editBtn.type = "button"; editBtn.className = "btn sm"; editBtn.textContent = "Edit";
+    editBtn.onclick = () => { editIndex = idx; fillForm(entries[idx]); };
+    const delBtn = document.createElement("button");
+    delBtn.type = "button"; delBtn.className = "btn sm danger"; delBtn.textContent = "Delete";
+    delBtn.onclick = () => { entries.splice(idx, 1); renderEntries(); resetForm(); };
 
-          const delBtn = document.createElement("button");
-          delBtn.type = "button";
-          delBtn.className = "btn sm danger";
-          delBtn.textContent = "Delete";
-          delBtn.onclick = () => {
-            entries.splice(idx, 1);
-            renderEntries();
-            resetForm();
-          };
-
-          actions.appendChild(editBtn);
-          actions.appendChild(delBtn);
-
-          card.appendChild(grid);
-          card.appendChild(actions);
-          entriesList.appendChild(card);
-        });
-      }
+    actions.appendChild(editBtn); actions.appendChild(delBtn);
+    card.appendChild(grid); card.appendChild(actions);
+    entriesList.appendChild(card);
+  });
+}
 
       // --- Export Entries to Excel ---
       function toExcel() {
@@ -1004,7 +994,7 @@
       downloadBtn.addEventListener("click", toExcel);
 
       // init
-      buildQ15();
+      attachQ15Validation();
       renderEntries();
     </script>
   </body>
