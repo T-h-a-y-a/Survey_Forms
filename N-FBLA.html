@@ -821,6 +821,25 @@
     document.addEventListener("DOMContentLoaded", () => { if (monthSel.value) refreshDays(); });
   }
 })();
+// --- Unsaved data guard ---
+let formDirty = false;
+
+// Mark form dirty on any user edit (ignore hidden fields)
+form.addEventListener("input", (e) => {
+  if (e.target && e.target.name && e.target.type !== "hidden") {
+    formDirty = true;
+  }
+});
+
+// Warn if the user tries to reload/close/navigate away
+window.addEventListener("beforeunload", (e) => {
+  if (entries.length > 0 || formDirty) {
+    e.preventDefault();           // Required for Chrome
+    e.returnValue = "";           // Shows a generic browser message
+    return "";                    // For older browsers
+  }
+});
+
 
 // ====== Q15 validation: only 01–72 in three text boxes ======
 const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
@@ -906,6 +925,7 @@ function attachQ15Validation() {
   submitBtn.textContent = "Update";
   cancelEditBtn.hidden = false;
   window.scrollTo({ top: 0, behavior: "smooth" });
+  formDirty = false;
 }
 
 function resetForm() {
@@ -913,6 +933,7 @@ function resetForm() {
   editIndex = null;
   submitBtn.textContent = "Submit";
   cancelEditBtn.hidden = true;
+  formDirty = false; 
 }
 
 // ====== Render entries list ======
