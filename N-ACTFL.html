@@ -931,6 +931,7 @@
         submitBtn.textContent = "Update";
         cancelEditBtn.hidden = false;
         window.scrollTo({ top: 0, behavior: "smooth" });
+        formDirty = false;
       }
 
       function resetForm() {
@@ -938,6 +939,7 @@
         editIndex = null;
         submitBtn.textContent = "Submit";
         cancelEditBtn.hidden = true;
+        formDirty = false;
       }
 
       // ====== Render entries list ======
@@ -1038,6 +1040,24 @@
         )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
         XLSX.writeFile(wb, fname);
       }
+      // --- Unsaved data guard ---
+let formDirty = false;
+
+// Mark form dirty on any user edit (ignore hidden fields)
+form.addEventListener("input", (e) => {
+  if (e.target && e.target.name && e.target.type !== "hidden") {
+    formDirty = true;
+  }
+});
+
+// Warn if the user tries to reload/close/navigate away
+window.addEventListener("beforeunload", (e) => {
+  if (entries.length > 0 || formDirty) {
+    e.preventDefault();           // Required for Chrome
+    e.returnValue = "";           // Shows a generic browser message
+    return "";                    // For older browsers
+  }
+});
 
       // ====== Events ======
       form.addEventListener("submit", (e) => {
