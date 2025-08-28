@@ -498,12 +498,12 @@
       <!-- Q15 -->
       <label class="labels">Q15:</label>
       <div id="q15" class="q15">
-        <div class="q15-row">
-          <input type="number" name="q15_1" maxlength="2" class="qbox" />
-          <input type="number" name="q15_2" maxlength="2" class="qbox" />
-          <input type="number" name="q15_3" maxlength="2" class="qbox" />
-        </div>
-      </div>
+  <div class="q15-row">
+    <select name="q15_1" class="qbox q15sel"><option value=""></option></select>
+    <select name="q15_2" class="qbox q15sel"><option value=""></option></select>
+    <select name="q15_3" class="qbox q15sel"><option value=""></option></select>
+  </div>
+</div>
 
       <!-- Q16 -->
       <label class="labels">Q16:</label>
@@ -784,6 +784,16 @@
       let entries = [];
       let editIndex = null;
       (function () {
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  const sels = document.querySelectorAll('.q15sel');
+  const options = ['<option value=""></option>']
+    .concat(Array.from({length:72}, (_,i) => {
+      const v = pad2(i+1);
+      return `<option value="${v}">${v}</option>`;
+    })).join('');
+  sels.forEach(sel => sel.innerHTML = options);
+})();
+      (function () {
         const monthSel = document.getElementById("birthMonth");
         const daySel = document.getElementById("birthDay");
         const yearInp = document.getElementById("birthYear");
@@ -1037,3 +1047,4 @@
     </script>
   </body>
 </html>
+
