@@ -498,12 +498,40 @@
       <!-- Q15 -->
       <label class="labels">Q15:</label>
       <div id="q15" class="q15">
-  <div class="q15-row">
-    <select name="q15_1" class="qbox q15sel"><option value=""></option></select>
-    <select name="q15_2" class="qbox q15sel"><option value=""></option></select>
-    <select name="q15_3" class="qbox q15sel"><option value=""></option></select>
-  </div>
-</div>
+        <div class="q15-row">
+          <input
+            name="q15_1"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            minlength="2"
+            placeholder="00"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+          <input
+            name="q15_2"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            minlength="2"
+            placeholder="00"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+          <input
+            name="q15_3"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            minlength="2"
+            placeholder="00"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+        </div>
+        <!-- <small class="muted">Enter two digits only (01–72).</small> -->
+      </div>
 
       <!-- Q16 -->
       <label class="labels">Q16:</label>
@@ -775,6 +803,7 @@
 
     <script>
       // --- State ---
+      // ====== State / Elements ======
       const form = document.getElementById("actflForm");
       const entriesList = document.getElementById("entriesList");
       const submitBtn = document.getElementById("submitBtn");
@@ -783,7 +812,8 @@
 
       let entries = [];
       let editIndex = null;
-      
+
+      // ====== DOB helpers (dynamic days) ======
       (function () {
         const monthSel = document.getElementById("birthMonth");
         const daySel = document.getElementById("birthDay");
@@ -793,10 +823,11 @@
           return String(n).padStart(2, "0");
         }
         function daysInMonth(m, y) {
-          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe non-leap fallback
+          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe fallback year
           return new Date(yr, m, 0).getDate(); // m is 1..12
         }
         function refreshDays() {
+          if (!daySel) return;
           daySel.innerHTML = '<option value="">DD</option>';
           const m = parseInt(monthSel.value, 10);
           if (!m) {
@@ -814,25 +845,51 @@
           daySel.disabled = false;
         }
 
-        monthSel.addEventListener("change", refreshDays);
-        yearInp.addEventListener("input", () => {
-          if (monthSel.value === "02") refreshDays();
-        });
-
-        // If Month prefilled (e.g., during Edit)
-        document.addEventListener("DOMContentLoaded", () => {
-          if (monthSel.value) refreshDays();
-        });
+        if (monthSel && daySel && yearInp) {
+          monthSel.addEventListener("change", refreshDays);
+          yearInp.addEventListener("input", () => {
+            if (monthSel.value === "02") refreshDays();
+          });
+          document.addEventListener("DOMContentLoaded", () => {
+            if (monthSel.value) refreshDays();
+          });
+        }
       })();
 
-      // --- Serialize Form ---
+      // ====== Q15 validation: only 01–72 in three text boxes ======
+      const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
+
+      function attachQ15Validation() {
+        const inputs = document.querySelectorAll("#q15 .q15in");
+        inputs.forEach((inp) => {
+          // keep only digits, limit to 2, live validity
+          inp.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
+            const v = e.target.value;
+            if (!v) {
+              e.target.setCustomValidity("");
+              return;
+            }
+            e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
+          });
+          // auto-pad single digit to 0X on blur
+          inp.addEventListener("blur", (e) => {
+            const v = e.target.value;
+            if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
+            const ok = !e.target.value || Q15_REGEX.test(e.target.value);
+            e.target.setCustomValidity(ok ? "" : "Enter 01–72");
+          });
+        });
+      }
+
+      // ====== Serialize Form ======
       function serializeForm(f) {
         const data = {};
         const elements = Array.from(f.elements).filter((el) => el.name);
 
-        // Manually add static values for SurveyYear and SurveyType
-        data["SurveyYear"] = "2026"; // Static value for SurveyYear
-        data["SurveyType"] = "SK"; // Static value for SurveyType
+        // include statics
+        data["SurveyYear"] = "2026";
+        data["SurveyType"] = "SK";
 
         elements.forEach((el) => {
           if (el.type === "checkbox") {
@@ -840,38 +897,18 @@
             if (el.checked) data[el.name].push(el.value);
           } else if (
             el.tagName === "SELECT" ||
-            ["text", "email", "number"].includes(el.type)
+            ["text", "email", "number", "hidden"].includes(el.type)
           ) {
-            data[el.name] = el.value.trim();
+            data[el.name] = (el.value || "").trim();
           }
         });
 
         return data;
       }
 
-      // --- Build Q15 (1..72) once ---
-      function buildQ15() {
-        const box = document.getElementById("q15Checkboxes");
-        if (!box) return; // skip if that container is not used on this version
-        const frag = document.createDocumentFragment();
-        for (let i = 1; i <= 72; i++) {
-          const lbl = document.createElement("label");
-          lbl.className = "opt";
-          const cb = document.createElement("input");
-          cb.type = "checkbox";
-          cb.name = "q15";
-          cb.value = String(i);
-          lbl.appendChild(cb);
-          lbl.appendChild(document.createTextNode(String(i)));
-          frag.appendChild(lbl);
-        }
-        box.appendChild(frag);
-      }
-
-      // --- Fill Form with Data ---
+      // ====== Fill form for editing ======
       function fillForm(data) {
         form.reset();
-        // set simple inputs/selects
         for (const [name, value] of Object.entries(data)) {
           const controls = form.querySelectorAll(
             `[name="${CSS.escape(name)}"]`
@@ -885,7 +922,7 @@
                 : value === ctrl.value;
             } else if (
               ctrl.tagName === "SELECT" ||
-              ["text", "email", "number"].includes(ctrl.type)
+              ["text", "email", "number", "hidden"].includes(ctrl.type)
             ) {
               ctrl.value = isArray ? value.join(", ") : value;
             }
@@ -896,7 +933,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      // --- Reset Form ---
       function resetForm() {
         form.reset();
         editIndex = null;
@@ -904,7 +940,7 @@
         cancelEditBtn.hidden = true;
       }
 
-      // --- Render Entries ---
+      // ====== Render entries list ======
       function renderEntries() {
         entriesList.innerHTML = "";
         if (!entries.length) {
@@ -927,7 +963,6 @@
           const grid = document.createElement("div");
           grid.className = "kv";
 
-          // Show all key-value pairs, including static data
           const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
           for (const key of keys) {
             const k = document.createElement("div");
@@ -953,7 +988,6 @@
             editIndex = idx;
             fillForm(entries[idx]);
           };
-
           const delBtn = document.createElement("button");
           delBtn.type = "button";
           delBtn.className = "btn sm danger";
@@ -966,33 +1000,26 @@
 
           actions.appendChild(editBtn);
           actions.appendChild(delBtn);
-
           card.appendChild(grid);
           card.appendChild(actions);
           entriesList.appendChild(card);
         });
       }
 
-      // --- Export Entries to Excel ---
+      // ====== Export to Excel ======
       function toExcel() {
         if (!entries.length) {
           alert("No entries to download.");
           return;
         }
 
-        // Flatten arrays to strings for Excel
         const flat = entries.map((obj) => {
-          const out = {};
-          // Manually include static values in the export
-          out["SurveyYear"] = "2026"; // Static value for SurveyYear
-          out["SurveyType"] = "SK"; // Static value for SurveyType
-          for (const [k, v] of Object.entries(obj)) {
+          const out = { SurveyYear: "2026", SurveyType: "SK" };
+          for (const [k, v] of Object.entries(obj))
             out[k] = Array.isArray(v) ? v.join(", ") : v;
-          }
           return out;
         });
 
-        // Ensure stable columns (union of keys)
         const cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
         const normalized = flat.map((o) => {
           const r = {};
@@ -1009,34 +1036,42 @@
         const fname = `ACTFL_Submissions_${d.getFullYear()}${pad(
           d.getMonth() + 1
         )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
-
         XLSX.writeFile(wb, fname);
       }
 
-      // --- Events ---
+      // ====== Events ======
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        // trigger native validity (covers Q15 inputs using setCustomValidity)
+        if (!form.reportValidity()) return;
+
         const data = serializeForm(form);
 
-        console.log(data); // This will log the serialized data to the console. Ensure SurveyYear and SurveyType are there.
+        // Extra safety: reject anything outside 01..72 for Q15 inputs
+        for (const key of ["q15_1", "q15_2", "q15_3"]) {
+          const val = data[key];
+          if (val && !Q15_REGEX.test(val)) {
+            alert(`Q15: "${val}" is invalid. Please enter 01–72.`);
+            return;
+          }
+        }
 
         if (editIndex !== null) {
           entries[editIndex] = data;
         } else {
           entries.push(data);
         }
-        renderEntries(); // Re-render the entries list to display updated data
-        resetForm(); // Reset the form for the next entry
+        renderEntries();
+        resetForm();
       });
 
       cancelEditBtn.addEventListener("click", resetForm);
       downloadBtn.addEventListener("click", toExcel);
 
-      // init
-      buildQ15();
+      // ====== Init ======
+      attachQ15Validation();
       renderEntries();
     </script>
   </body>
 </html>
-
-
