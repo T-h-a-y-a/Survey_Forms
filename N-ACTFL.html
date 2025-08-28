@@ -44,7 +44,7 @@
         <div class="datas">
           <label class="labels"
             >Form:
-            <input type="number" maxlength="5" name="form" />
+            <input type="text" maxlength="5" name="form" />
           </label>
         </div>
       </div>
@@ -86,19 +86,72 @@
 
       <label class="birth-label labels">Birth Date:</label>
       <div class="dob">
+        <!-- Month -->
         <div class="dob-col">
-          <small>Month</small>
-          <input type="text" name="birthMonth" maxlength="2" placeholder="MM" />
+          <small><label for="birthMonth">Month</label></small>
+          <select name="birthMonth" id="birthMonth">
+            <option value="">MM</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
         </div>
+
+        <!-- Day -->
         <div class="dob-col">
-          <small>Day</small>
-          <input type="text" name="birthDay" maxlength="2" placeholder="DD" />
+          <small><label for="birthDay">Day</label></small>
+          <select name="birthDay" id="birthDay">
+            <option value="">DD</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+          </select>
         </div>
+
+        <!-- Year (kept as input) -->
         <div class="dob-col">
-          <small>Year</small>
+          <small><label for="birthYear">Year</label></small>
           <input
             type="text"
             name="birthYear"
+            id="birthYear"
             maxlength="4"
             placeholder="YYYY"
           />
@@ -134,7 +187,7 @@
             <option value="C+">C+</option>
             <option value="C">C</option>
             <option value="C-">C-</option>
-            <option value="Lower than C">Lower than C</option>
+            <option value="LC">Lower than C</option>
           </select>
         </div>
       </div>
@@ -384,22 +437,11 @@
             <td><input type="text" name="college1" /></td>
             <td><input type="text" name="state1" /></td>
             <td>
-              <div class="yn">
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college1Yes"
-                    value="Y"
-                  />Yes</label
-                >
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college1No"
-                    value="N"
-                  />No</label
-                >
-              </div>
+              <select name="college1YN">
+                <option value=""></option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
             </td>
           </tr>
           <tr>
@@ -407,22 +449,11 @@
             <td><input type="text" name="college2" /></td>
             <td><input type="text" name="state2" /></td>
             <td>
-              <div class="yn">
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college2Yes"
-                    value="Y"
-                  />Yes</label
-                >
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college2No"
-                    value="N"
-                  />No</label
-                >
-              </div>
+              <select name="college2YN">
+                <option value=""></option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
             </td>
           </tr>
           <tr>
@@ -430,22 +461,11 @@
             <td><input type="text" name="college3" /></td>
             <td><input type="text" name="state3" /></td>
             <td>
-              <div class="yn">
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college3Yes"
-                    value="Y"
-                  />Yes</label
-                >
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college3No"
-                    value="N"
-                  />No</label
-                >
-              </div>
+              <select name="college3YN">
+                <option value=""></option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
             </td>
           </tr>
           <tr>
@@ -453,22 +473,11 @@
             <td><input type="text" name="college4" /></td>
             <td><input type="text" name="state4" /></td>
             <td>
-              <div class="yn">
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college4Yes"
-                    value="Y"
-                  />Yes</label
-                >
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college4No"
-                    value="N"
-                  />No</label
-                >
-              </div>
+              <select name="college4YN">
+                <option value=""></option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
             </td>
           </tr>
           <tr>
@@ -476,22 +485,11 @@
             <td><input type="text" name="college5" /></td>
             <td><input type="text" name="state5" /></td>
             <td>
-              <div class="yn">
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college5Yes"
-                    value="Y"
-                  />Yes</label
-                >
-                <label
-                  ><input
-                    type="checkbox"
-                    name="college5No"
-                    value="N"
-                  />No</label
-                >
-              </div>
+              <select name="college5YN">
+                <option value=""></option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
             </td>
           </tr>
         </tbody>
@@ -785,6 +783,46 @@
 
       let entries = [];
       let editIndex = null;
+      (function () {
+        const monthSel = document.getElementById("birthMonth");
+        const daySel = document.getElementById("birthDay");
+        const yearInp = document.getElementById("birthYear");
+
+        function pad2(n) {
+          return String(n).padStart(2, "0");
+        }
+        function daysInMonth(m, y) {
+          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe non-leap fallback
+          return new Date(yr, m, 0).getDate(); // m is 1..12
+        }
+        function refreshDays() {
+          daySel.innerHTML = '<option value="">DD</option>';
+          const m = parseInt(monthSel.value, 10);
+          if (!m) {
+            daySel.disabled = true;
+            return;
+          }
+          const count = daysInMonth(m, yearInp.value);
+          for (let d = 1; d <= count; d++) {
+            const v = pad2(d);
+            const opt = document.createElement("option");
+            opt.value = v;
+            opt.textContent = v;
+            daySel.appendChild(opt);
+          }
+          daySel.disabled = false;
+        }
+
+        monthSel.addEventListener("change", refreshDays);
+        yearInp.addEventListener("input", () => {
+          if (monthSel.value === "02") refreshDays();
+        });
+
+        // If Month prefilled (e.g., during Edit)
+        document.addEventListener("DOMContentLoaded", () => {
+          if (monthSel.value) refreshDays();
+        });
+      })();
 
       // --- Serialize Form ---
       function serializeForm(f) {
@@ -813,6 +851,7 @@
       // --- Build Q15 (1..72) once ---
       function buildQ15() {
         const box = document.getElementById("q15Checkboxes");
+        if (!box) return; // skip if that container is not used on this version
         const frag = document.createDocumentFragment();
         for (let i = 1; i <= 72; i++) {
           const lbl = document.createElement("label");
@@ -998,4 +1037,3 @@
     </script>
   </body>
 </html>
-
