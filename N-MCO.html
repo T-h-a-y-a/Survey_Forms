@@ -37,13 +37,13 @@
         <div class="datas">
           <label class="labels"
             >EVID:
-            <input type="text" minlength="9" maxlength="9" name="evid" />
+            <input type="text" maxlength="9" name="evid" />
           </label>
         </div>
         <div class="datas">
           <label class="labels"
             >Form:
-            <input type="text" minlength="5" maxlength="5" name="form" />
+            <input type="text" maxlength="5" name="form" />
           </label>
         </div>
       </div>
@@ -73,13 +73,9 @@
         <input type="text" name="state" />
       </label>
 
-     <label class="labels"
+      <label class="labels"
         >Zip Code:
-        <input type="text" minlength="5"  maxlength="5" name="zipCode" />
-      </label>
-       <label class="labels"
-        >Zip4 Code:
-        <input type="text" maxlength="4" name="zipCode" />
+        <input type="number" name="zipCode" />
       </label>
 
       <label class="labels"
@@ -149,19 +145,15 @@
         </div>
 
         <!-- Year (kept as input) -->
-       <div class="dob-col">
+        <div class="dob-col">
           <small><label for="birthYear">Year</label></small>
-         <select name="birthYear" id="birthYear">
-            <option value="">YYYY</option>
-            <option value="2006">2006</option>
-            <option value="2007">2007</option>
-            <option value="2008">2008</option>
-            <option value="2009">2009</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-          </select>
+          <input
+            type="text"
+            name="birthYear"
+            id="birthYear"
+            maxlength="4"
+            placeholder="YYYY"
+          />
         </div>
       </div>
 
@@ -672,87 +664,174 @@
 
       <!-- Q18 -->
       <label class="labels">Q14:</label>
-      <div class="choices wrap">
-        <!-- A–Z -->
-        <label class="opt"
-          ><input type="checkbox" name="q14" value="A" />A</label
+      <div class="datasss">
+          <div class="disc">
+            <label class="labels">14A:</label>
+            <div class="choices choicesss inline">
+              <label class="opt"
+          ><input type="checkbox" name="q14-a" value="A" />A</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="B" />B</label
+          ><input type="checkbox" name="q14-a" value="B" />B</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="C" />C</label
+          ><input type="checkbox" name="q14-a" value="C" />C</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="D" />D</label
+          ><input type="checkbox" name="q14-a" value="D" />D</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="E" />E</label
+          ><input type="checkbox" name="q14-a" value="E" />E</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="F" />F</label
+          ><input type="checkbox" name="q14-a" value="F" />F</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="G" />G</label
+          ><input type="checkbox" name="q14-a" value="G" />G</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="H" />H</label
+          ><input type="checkbox" name="q14-a" value="H" />H</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="I" />I</label
+          ><input type="checkbox" name="q14-a" value="I" />I</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="J" />J</label
+          ><input type="checkbox" name="q14-a" value="J" />J</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="K" />K</label
+          ><input type="checkbox" name="q14-a" value="K" />K</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="L" />L</label
+          ><input type="checkbox" name="q14-a" value="L" />L</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="M" />M</label
+          ><input type="checkbox" name="q14-a" value="M" />M</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="N" />N</label
+          ><input type="checkbox" name="q14-a" value="N" />N</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="O" />O</label
+          ><input type="checkbox" name="q14-a" value="O" />O</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="P" />P</label
+          ><input type="checkbox" name="q14-a" value="P" />P</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="Q" />Q</label
+          ><input type="checkbox" name="q14-a" value="Q" />Q</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="R" />R</label
+          ><input type="checkbox" name="q14-a" value="R" />R</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="S" />S</label
+          ><input type="checkbox" name="q14-a" value="S" />S</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="T" />T</label
+          ><input type="checkbox" name="q14-a" value="T" />T</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="U" />U</label
+          ><input type="checkbox" name="q14-a" value="U" />U</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="V" />V</label
+          ><input type="checkbox" name="q14-a" value="V" />V</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="W" />W</label
+          ><input type="checkbox" name="q14-a" value="W" />W</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="X" />X</label
+          ><input type="checkbox" name="q14-a" value="X" />X</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="Y" />Y</label
+          ><input type="checkbox" name="q14-a" value="Y" />Y</label
         >
         <label class="opt"
-          ><input type="checkbox" name="q14" value="Z" />Z</label
+          ><input type="checkbox" name="q14-a" value="Z" />Z</label
         >
-      </div>
+            </div>
+          </div>
+          <div class="disc">
+            <label class="labels">14B:</label>
+            <div class="choices choicesss inline">
+              <label class="opt"
+          ><input type="checkbox" name="q14-b" value="A" />A</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="B" />B</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="C" />C</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="D" />D</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="E" />E</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="F" />F</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="G" />G</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="H" />H</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="I" />I</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="J" />J</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="K" />K</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="L" />L</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="M" />M</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="N" />N</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="O" />O</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="P" />P</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="Q" />Q</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="R" />R</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="S" />S</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="T" />T</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="U" />U</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="V" />V</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="W" />W</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="X" />X</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="Y" />Y</label
+        >
+        <label class="opt"
+          ><input type="checkbox" name="q14-b" value="Z" />Z</label
+        >
+            </div>
+          </div>
+        </div>
 
       <!-- Q19 -->
       <label class="labels">Q15:</label>
@@ -1085,6 +1164,3 @@ function renderEntries() {
     </script>
   </body>
 </html>
-
-
-
