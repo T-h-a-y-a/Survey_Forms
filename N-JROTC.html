@@ -73,9 +73,13 @@
         <input type="text" name="state" />
       </label>
 
-      <label class="labels"
+       <label class="labels"
         >Zip Code:
-        <input type="number" name="zipCode" />
+        <input type="text" minlength="5"  maxlength="5" name="zipCode" />
+      </label>
+       <label class="labels"
+        >Zip4 Code:
+        <input type="text" maxlength="4" name="zipCode" />
       </label>
 
       <label class="labels"
@@ -1175,3 +1179,4 @@ function renderEntries() {
     </script>
   </body>
 </html>
+
