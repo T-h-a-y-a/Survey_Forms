@@ -529,7 +529,7 @@
         <input type="text" name="q19" />
       </label>
 
-      <!-- Q20 (FIXED NAME) -->
+      <!-- Q20 -->
       <div class="datas">
         <label class="labels">Q20:</label>
         <div class="choices inline">
@@ -569,7 +569,7 @@
       let entries = [];
       let editIndex = null;
 
-      // --- DOB dropdown logic (Month -> Day, with leap-year via Year) ---
+      // --- DOB dropdown logic (Month -> Day, leap-year via Year) ---
       (function () {
         const monthSel = document.getElementById("birthMonth");
         const daySel = document.getElementById("birthDay");
@@ -577,7 +577,7 @@
 
         function pad2(n) { return String(n).padStart(2, "0"); }
         function daysInMonth(m, y) {
-          const yr = /^\\d{4}$/.test(y) ? +y : 2001; // safe non-leap fallback
+          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe non-leap fallback
           return new Date(yr, m, 0).getDate(); // m is 1..12
         }
         function refreshDays() {
@@ -599,7 +599,6 @@
           monthSel.addEventListener("change", refreshDays);
           yearSel.addEventListener("change", () => { if (monthSel.value === "02") refreshDays(); });
           yearSel.addEventListener("input", () => { if (monthSel.value === "02") refreshDays(); });
-          // initialize if month already selected
           if (monthSel.value) refreshDays();
         }
       })();
@@ -625,7 +624,7 @@
         const inputs = document.querySelectorAll("#q15 .q15in");
         inputs.forEach((inp) => {
           inp.addEventListener("input", (e) => {
-            e.target.value = e.target.value.replace(/\\D/g, "").slice(0, 2);
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
             const v = e.target.value;
             if (!v) { e.target.setCustomValidity(""); return; }
             e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
@@ -639,7 +638,7 @@
         });
       }
 
-      // --- Serialize Form ---
+      // --- Serialize Form (robust, preserves q19 & q20 separately) ---
       function serializeForm(f) {
         const data = {};
         const elements = Array.from(f.elements).filter((el) => el.name);
@@ -648,29 +647,40 @@
         data["SurveyYear"] = "2026";
         data["SurveyType"] = "SO";
 
-        elements.forEach((el) => {
+        for (const el of elements) {
           if (el.type === "checkbox") {
             if (!data[el.name]) data[el.name] = [];
             if (el.checked) data[el.name].push(el.value);
-          } else if (el.tagName === "SELECT" || ["text", "email", "number"].includes(el.type)) {
+            continue;
+          }
+
+          if (el.tagName === "SELECT" || ["text", "email", "number", "hidden"].includes(el.type)) {
             const val = (el.value || "").trim();
-            // If a duplicate non-checkbox name appears, keep the first non-empty value
-            if (data.hasOwnProperty(el.name)) {
-              if (!data[el.name] && val) data[el.name] = val;
-            } else {
+
+            if (!Object.prototype.hasOwnProperty.call(data, el.name)) {
               data[el.name] = val;
+            } else if (val && typeof data[el.name] === "string" && !data[el.name]) {
+              // fill previously-empty duplicate if it occurs
+              data[el.name] = val;
+            } else if (val && data[el.name] !== val) {
+              // Guardrail: warn about unexpected duplicate name collisions
+              console.warn(`Duplicate name "${el.name}" encountered — keeping first value "${data[el.name]}", dropping "${val}".`);
             }
           }
-        });
+        }
+
+        // Guarantee both keys exist so Excel always has both columns
+        if (!("q19" in data)) data.q19 = "";
+        if (!("q20" in data)) data.q20 = "";
 
         return data;
       }
 
-      // --- Fill Form with Data ---
+      // --- Fill Form with Data (for Edit) ---
       function fillForm(data) {
         form.reset();
         for (const [name, value] of Object.entries(data)) {
-          const controls = form.querySelectorAll(`[name="\${CSS.escape(name)}"]`);
+          const controls = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
           if (!controls.length) continue;
           const isArray = Array.isArray(value);
           controls.forEach((ctrl) => {
@@ -711,7 +721,7 @@
           const title = document.createElement("summary");
           const first = entry.firstName || "";
           const last = entry.lastName || "";
-          title.textContent = `Entry #\${idx + 1} — \${first} \${last}`.trim();
+          title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
           card.appendChild(title);
 
           const grid = document.createElement("div");
@@ -773,7 +783,7 @@
 
         const pad = (n) => String(n).padStart(2, "0");
         const d = new Date();
-        const fname = `N-FBLA_Submissions_\${d.getFullYear()}\${pad(d.getMonth() + 1)}\${pad(d.getDate())}_\${pad(d.getHours())}\${pad(d.getMinutes())}.xlsx`;
+        const fname = `N-FBLA_Submissions_${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
 
         XLSX.writeFile(wb, fname);
       }
@@ -782,7 +792,9 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = serializeForm(form);
-        // console.log('Serialized:', data);
+
+        // Quick sanity: ensure we see both fields distinctly
+        // console.log('Q19:', data.q19, 'Q20:', data.q20);
 
         if (editIndex !== null) {
           entries[editIndex] = data;
