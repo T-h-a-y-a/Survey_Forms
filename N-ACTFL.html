@@ -945,17 +945,16 @@
     }
 
     // Load years (1900 → current)
-    function loadYears() {
-      if (!yearSel) return;
-      const currentYear = new Date().getFullYear();
-      yearSel.innerHTML = '<option value="">YYYY</option>';
-      for (let y = currentYear; y >= 1900; y--) {
-        const opt = document.createElement("option");
-        opt.value = y;
-        opt.textContent = y;
-        yearSel.appendChild(opt);
-      }
-    }
+   function loadYears() {
+  if (!yearSel) return;
+  yearSel.innerHTML = '<option value="">YYYY</option>';
+  for (let y = 2013; y >= 2006; y--) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    yearSel.appendChild(opt);
+  }
+}
 
     // Initialize all three dropdowns
     loadMonths();
@@ -1198,6 +1197,7 @@
 
   </body>
 </html>
+
 
 
 
