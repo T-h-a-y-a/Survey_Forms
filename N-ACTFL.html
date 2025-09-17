@@ -908,7 +908,7 @@
   let entries = [];
   let editIndex = null;
 
-  // ====== DOB helpers (dynamic days with leap year handling) ======
+  // ====== DOB helpers (static days, no leap year recalculation) ======
   (function () {
     const monthSel = document.getElementById("birthMonth");
     const daySel = document.getElementById("birthDay");
@@ -918,25 +918,11 @@
       return String(n).padStart(2, "0");
     }
 
-    function daysInMonth(m, y) {
-      const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe fallback year
-      return new Date(yr, m, 0).getDate(); // m is 1..12
-    }
-
+    // Always load 31 days — no recalculation for leap year
     function refreshDays() {
       if (!daySel) return;
-      const prevVal = daySel.value; // save previous selection
-
-      const m = parseInt(monthSel.value, 10);
-      if (!m) {
-        daySel.innerHTML = '<option value="">DD</option>';
-        daySel.disabled = true;
-        return;
-      }
-
-      const count = daysInMonth(m, yearInp.value);
       daySel.innerHTML = '<option value="">DD</option>';
-      for (let d = 1; d <= count; d++) {
+      for (let d = 1; d <= 31; d++) {
         const v = pad2(d);
         const opt = document.createElement("option");
         opt.value = v;
@@ -944,23 +930,10 @@
         daySel.appendChild(opt);
       }
       daySel.disabled = false;
-
-      // ✅ Restore previous selection if still valid
-      if (prevVal && parseInt(prevVal) <= count) {
-        daySel.value = prevVal;
-      }
-      // ✅ Special case: Feb 29 → auto-adjust to 28 if not leap year
-      else if (prevVal === "29" && count === 28) {
-        daySel.value = "28";
-      }
     }
 
     if (monthSel && daySel && yearInp) {
-      monthSel.addEventListener("change", refreshDays);
-      yearInp.addEventListener("input", refreshDays);
-      document.addEventListener("DOMContentLoaded", () => {
-        if (monthSel.value) refreshDays();
-      });
+      refreshDays(); // load once only
     }
   })();
 
@@ -1016,7 +989,9 @@
   function fillForm(data) {
     form.reset();
     for (const [name, value] of Object.entries(data)) {
-      const controls = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+      const controls = form.querySelectorAll(
+        `[name="${CSS.escape(name)}"]`
+      );
       if (!controls.length) continue;
       const isArray = Array.isArray(value);
       controls.forEach((ctrl) => {
@@ -1147,6 +1122,7 @@
 
   // --- Unsaved data guard ---
   let formDirty = false;
+
   form.addEventListener("input", (e) => {
     if (e.target && e.target.name && e.target.type !== "hidden") {
       formDirty = true;
@@ -1192,6 +1168,7 @@
   attachQ15Validation();
   renderEntries();
 </script>
+
 
   </body>
 </html>
