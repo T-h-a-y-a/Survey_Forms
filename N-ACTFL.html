@@ -897,7 +897,7 @@
     <!-- SheetJS for Excel export -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-    <script>
+   <script>
   // --- State ---
   const form = document.getElementById("actflForm");
   const entriesList = document.getElementById("entriesList");
@@ -908,18 +908,31 @@
   let entries = [];
   let editIndex = null;
 
-  // ====== DOB helpers (static days, no leap year recalculation) ======
+  // ====== DOB helpers (independent dropdowns: MM, DD, YYYY) ======
   (function () {
     const monthSel = document.getElementById("birthMonth");
     const daySel = document.getElementById("birthDay");
-    const yearInp = document.getElementById("birthYear");
+    const yearSel = document.getElementById("birthYear");
 
     function pad2(n) {
       return String(n).padStart(2, "0");
     }
 
-    // Always load 31 days — no recalculation for leap year
-    function refreshDays() {
+    // Load 01–12 months
+    function loadMonths() {
+      if (!monthSel) return;
+      monthSel.innerHTML = '<option value="">MM</option>';
+      for (let m = 1; m <= 12; m++) {
+        const v = pad2(m);
+        const opt = document.createElement("option");
+        opt.value = v;
+        opt.textContent = v;
+        monthSel.appendChild(opt);
+      }
+    }
+
+    // Load 01–31 days
+    function loadDays() {
       if (!daySel) return;
       daySel.innerHTML = '<option value="">DD</option>';
       for (let d = 1; d <= 31; d++) {
@@ -929,12 +942,25 @@
         opt.textContent = v;
         daySel.appendChild(opt);
       }
-      daySel.disabled = false;
     }
 
-    if (monthSel && daySel && yearInp) {
-      refreshDays(); // load once only
+    // Load years (1900 → current)
+    function loadYears() {
+      if (!yearSel) return;
+      const currentYear = new Date().getFullYear();
+      yearSel.innerHTML = '<option value="">YYYY</option>';
+      for (let y = currentYear; y >= 1900; y--) {
+        const opt = document.createElement("option");
+        opt.value = y;
+        opt.textContent = y;
+        yearSel.appendChild(opt);
+      }
     }
+
+    // Initialize all three dropdowns
+    loadMonths();
+    loadDays();
+    loadYears();
   })();
 
   // ====== Q15 validation: only 01–72 in three text boxes ======
@@ -1172,6 +1198,7 @@
 
   </body>
 </html>
+
 
 
 
