@@ -898,299 +898,304 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <script>
-      // --- State ---
-      // ====== State / Elements ======
-      const form = document.getElementById("actflForm");
-      const entriesList = document.getElementById("entriesList");
-      const submitBtn = document.getElementById("submitBtn");
-      const cancelEditBtn = document.getElementById("cancelEditBtn");
-      const downloadBtn = document.getElementById("downloadBtn");
+  // --- State ---
+  const form = document.getElementById("actflForm");
+  const entriesList = document.getElementById("entriesList");
+  const submitBtn = document.getElementById("submitBtn");
+  const cancelEditBtn = document.getElementById("cancelEditBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
 
-      let entries = [];
-      let editIndex = null;
+  let entries = [];
+  let editIndex = null;
 
-      // ====== DOB helpers (dynamic days) ======
-      (function () {
-        const monthSel = document.getElementById("birthMonth");
-        const daySel = document.getElementById("birthDay");
-        const yearInp = document.getElementById("birthYear");
+  // ====== DOB helpers (dynamic days with leap year handling) ======
+  (function () {
+    const monthSel = document.getElementById("birthMonth");
+    const daySel = document.getElementById("birthDay");
+    const yearInp = document.getElementById("birthYear");
 
-        function pad2(n) {
-          return String(n).padStart(2, "0");
-        }
-        function daysInMonth(m, y) {
-          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe fallback year
-          return new Date(yr, m, 0).getDate(); // m is 1..12
-        }
-        function refreshDays() {
-          if (!daySel) return;
-          daySel.innerHTML = '<option value="">DD</option>';
-          const m = parseInt(monthSel.value, 10);
-          if (!m) {
-            daySel.disabled = true;
-            return;
-          }
-          const count = daysInMonth(m, yearInp.value);
-          for (let d = 1; d <= count; d++) {
-            const v = pad2(d);
-            const opt = document.createElement("option");
-            opt.value = v;
-            opt.textContent = v;
-            daySel.appendChild(opt);
-          }
-          daySel.disabled = false;
-        }
+    function pad2(n) {
+      return String(n).padStart(2, "0");
+    }
 
-        if (monthSel && daySel && yearInp) {
-          monthSel.addEventListener("change", refreshDays);
-          yearInp.addEventListener("input", () => {
-            if (monthSel.value === "02") refreshDays();
-          });
-          document.addEventListener("DOMContentLoaded", () => {
-            if (monthSel.value) refreshDays();
-          });
-        }
-      })();
+    function daysInMonth(m, y) {
+      const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe fallback year
+      return new Date(yr, m, 0).getDate(); // m is 1..12
+    }
 
-      // ====== Q15 validation: only 01–72 in three text boxes ======
-      const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
+    function refreshDays() {
+      if (!daySel) return;
+      const prevVal = daySel.value; // save previous selection
 
-      function attachQ15Validation() {
-        const inputs = document.querySelectorAll("#q15 .q15in");
-        inputs.forEach((inp) => {
-          // keep only digits, limit to 2, live validity
-          inp.addEventListener("input", (e) => {
-            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
-            const v = e.target.value;
-            if (!v) {
-              e.target.setCustomValidity("");
-              return;
-            }
-            e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
-          });
-          // auto-pad single digit to 0X on blur
-          inp.addEventListener("blur", (e) => {
-            const v = e.target.value;
-            if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
-            const ok = !e.target.value || Q15_REGEX.test(e.target.value);
-            e.target.setCustomValidity(ok ? "" : "Enter 01–72");
-          });
-        });
+      const m = parseInt(monthSel.value, 10);
+      if (!m) {
+        daySel.innerHTML = '<option value="">DD</option>';
+        daySel.disabled = true;
+        return;
       }
 
-      // ====== Serialize Form ======
-      function serializeForm(f) {
-        const data = {};
-        const elements = Array.from(f.elements).filter((el) => el.name);
-
-        // include statics
-        data["SurveyYear"] = "2026";
-        data["SurveyType"] = "SK";
-
-        elements.forEach((el) => {
-          if (el.type === "checkbox") {
-            if (!data[el.name]) data[el.name] = [];
-            if (el.checked) data[el.name].push(el.value);
-          } else if (
-            el.tagName === "SELECT" ||
-            ["text", "email", "number", "hidden"].includes(el.type)
-          ) {
-            data[el.name] = (el.value || "").trim();
-          }
-        });
-
-        return data;
+      const count = daysInMonth(m, yearInp.value);
+      daySel.innerHTML = '<option value="">DD</option>';
+      for (let d = 1; d <= count; d++) {
+        const v = pad2(d);
+        const opt = document.createElement("option");
+        opt.value = v;
+        opt.textContent = v;
+        daySel.appendChild(opt);
       }
+      daySel.disabled = false;
 
-      // ====== Fill form for editing ======
-      function fillForm(data) {
-        form.reset();
-        for (const [name, value] of Object.entries(data)) {
-          const controls = form.querySelectorAll(
-            `[name="${CSS.escape(name)}"]`
-          );
-          if (!controls.length) continue;
-          const isArray = Array.isArray(value);
-          controls.forEach((ctrl) => {
-            if (ctrl.type === "checkbox") {
-              ctrl.checked = isArray
-                ? value.includes(ctrl.value)
-                : value === ctrl.value;
-            } else if (
-              ctrl.tagName === "SELECT" ||
-              ["text", "email", "number", "hidden"].includes(ctrl.type)
-            ) {
-              ctrl.value = isArray ? value.join(", ") : value;
-            }
-          });
-        }
-        submitBtn.textContent = "Update";
-        cancelEditBtn.hidden = false;
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        formDirty = false;
+      // ✅ Restore previous selection if still valid
+      if (prevVal && parseInt(prevVal) <= count) {
+        daySel.value = prevVal;
       }
-
-      function resetForm() {
-        form.reset();
-        editIndex = null;
-        submitBtn.textContent = "Submit";
-        cancelEditBtn.hidden = true;
-        formDirty = false;
+      // ✅ Special case: Feb 29 → auto-adjust to 28 if not leap year
+      else if (prevVal === "29" && count === 28) {
+        daySel.value = "28";
       }
+    }
 
-      // ====== Render entries list ======
-      function renderEntries() {
-        entriesList.innerHTML = "";
-        if (!entries.length) {
-          entriesList.innerHTML =
-            '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
+    if (monthSel && daySel && yearInp) {
+      monthSel.addEventListener("change", refreshDays);
+      yearInp.addEventListener("input", refreshDays);
+      document.addEventListener("DOMContentLoaded", () => {
+        if (monthSel.value) refreshDays();
+      });
+    }
+  })();
+
+  // ====== Q15 validation: only 01–72 in three text boxes ======
+  const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
+
+  function attachQ15Validation() {
+    const inputs = document.querySelectorAll("#q15 .q15in");
+    inputs.forEach((inp) => {
+      inp.addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
+        const v = e.target.value;
+        if (!v) {
+          e.target.setCustomValidity("");
           return;
         }
+        e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
+      });
+      inp.addEventListener("blur", (e) => {
+        const v = e.target.value;
+        if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
+        const ok = !e.target.value || Q15_REGEX.test(e.target.value);
+        e.target.setCustomValidity(ok ? "" : "Enter 01–72");
+      });
+    });
+  }
 
-        entries.forEach((entry, idx) => {
-          const card = document.createElement("details");
-          card.className = "entry";
-          if (idx === entries.length - 1) card.open = true;
+  // ====== Serialize Form ======
+  function serializeForm(f) {
+    const data = {};
+    const elements = Array.from(f.elements).filter((el) => el.name);
 
-          const title = document.createElement("summary");
-          const first = entry.firstName || "";
-          const last = entry.lastName || "";
-          title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
-          card.appendChild(title);
+    // include statics
+    data["SurveyYear"] = "2026";
+    data["SurveyType"] = "SK";
 
-          const grid = document.createElement("div");
-          grid.className = "kv";
+    elements.forEach((el) => {
+      if (el.type === "checkbox") {
+        if (!data[el.name]) data[el.name] = [];
+        if (el.checked) data[el.name].push(el.value);
+      } else if (
+        el.tagName === "SELECT" ||
+        ["text", "email", "number", "hidden"].includes(el.type)
+      ) {
+        data[el.name] = (el.value || "").trim();
+      }
+    });
 
-          const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
-          for (const key of keys) {
-            const k = document.createElement("div");
-            k.className = "k";
-            k.textContent = key;
-            const v = document.createElement("div");
-            v.className = "v";
-            const val = Array.isArray(entry[key])
-              ? entry[key].join(", ")
-              : entry[key];
-            v.textContent = val ?? "";
-            grid.appendChild(k);
-            grid.appendChild(v);
-          }
+    return data;
+  }
 
-          const actions = document.createElement("div");
-          actions.className = "row-actions";
-          const editBtn = document.createElement("button");
-          editBtn.type = "button";
-          editBtn.className = "btn sm";
-          editBtn.textContent = "Edit";
-          editBtn.onclick = () => {
-            editIndex = idx;
-            fillForm(entries[idx]);
-          };
-          const delBtn = document.createElement("button");
-          delBtn.type = "button";
-          delBtn.className = "btn sm danger";
-          delBtn.textContent = "Delete";
-          delBtn.onclick = () => {
-            entries.splice(idx, 1);
-            renderEntries();
-            resetForm();
-          };
+  // ====== Fill form for editing ======
+  function fillForm(data) {
+    form.reset();
+    for (const [name, value] of Object.entries(data)) {
+      const controls = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+      if (!controls.length) continue;
+      const isArray = Array.isArray(value);
+      controls.forEach((ctrl) => {
+        if (ctrl.type === "checkbox") {
+          ctrl.checked = isArray
+            ? value.includes(ctrl.value)
+            : value === ctrl.value;
+        } else if (
+          ctrl.tagName === "SELECT" ||
+          ["text", "email", "number", "hidden"].includes(ctrl.type)
+        ) {
+          ctrl.value = isArray ? value.join(", ") : value;
+        }
+      });
+    }
+    submitBtn.textContent = "Update";
+    cancelEditBtn.hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    formDirty = false;
+  }
 
-          actions.appendChild(editBtn);
-          actions.appendChild(delBtn);
-          card.appendChild(grid);
-          card.appendChild(actions);
-          entriesList.appendChild(card);
-        });
+  function resetForm() {
+    form.reset();
+    editIndex = null;
+    submitBtn.textContent = "Submit";
+    cancelEditBtn.hidden = true;
+    formDirty = false;
+  }
+
+  // ====== Render entries list ======
+  function renderEntries() {
+    entriesList.innerHTML = "";
+    if (!entries.length) {
+      entriesList.innerHTML =
+        '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
+      return;
+    }
+
+    entries.forEach((entry, idx) => {
+      const card = document.createElement("details");
+      card.className = "entry";
+      if (idx === entries.length - 1) card.open = true;
+
+      const title = document.createElement("summary");
+      const first = entry.firstName || "";
+      const last = entry.lastName || "";
+      title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
+      card.appendChild(title);
+
+      const grid = document.createElement("div");
+      grid.className = "kv";
+
+      const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
+      for (const key of keys) {
+        const k = document.createElement("div");
+        k.className = "k";
+        k.textContent = key;
+        const v = document.createElement("div");
+        v.className = "v";
+        const val = Array.isArray(entry[key])
+          ? entry[key].join(", ")
+          : entry[key];
+        v.textContent = val ?? "";
+        grid.appendChild(k);
+        grid.appendChild(v);
       }
 
-      // ====== Export to Excel ======
-      function toExcel() {
-        if (!entries.length) {
-          alert("No entries to download.");
-          return;
-        }
-
-        const flat = entries.map((obj) => {
-          const out = { SurveyYear: "2026", SurveyType: "SK" };
-          for (const [k, v] of Object.entries(obj))
-            out[k] = Array.isArray(v) ? v.join(", ") : v;
-          return out;
-        });
-
-        const cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
-        const normalized = flat.map((o) => {
-          const r = {};
-          cols.forEach((c) => (r[c] = o[c] ?? ""));
-          return r;
-        });
-
-        const ws = XLSX.utils.json_to_sheet(normalized, { header: cols });
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "ACTFL Entries");
-
-        const pad = (n) => String(n).padStart(2, "0");
-        const d = new Date();
-        const fname = `ACTFL_Submissions_${d.getFullYear()}${pad(
-          d.getMonth() + 1
-        )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
-        XLSX.writeFile(wb, fname);
-      }
-      // --- Unsaved data guard ---
-let formDirty = false;
-
-// Mark form dirty on any user edit (ignore hidden fields)
-form.addEventListener("input", (e) => {
-  if (e.target && e.target.name && e.target.type !== "hidden") {
-    formDirty = true;
-  }
-});
-
-// Warn if the user tries to reload/close/navigate away
-window.addEventListener("beforeunload", (e) => {
-  if (entries.length > 0 || formDirty) {
-    e.preventDefault();           // Required for Chrome
-    e.returnValue = "";           // Shows a generic browser message
-    return "";                    // For older browsers
-  }
-});
-
-      // ====== Events ======
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        // trigger native validity (covers Q15 inputs using setCustomValidity)
-        if (!form.reportValidity()) return;
-
-        const data = serializeForm(form);
-
-        // Extra safety: reject anything outside 01..72 for Q15 inputs
-        for (const key of ["q15_1", "q15_2", "q15_3"]) {
-          const val = data[key];
-          if (val && !Q15_REGEX.test(val)) {
-            alert(`Q15: "${val}" is invalid. Please enter 01–72.`);
-            return;
-          }
-        }
-
-        if (editIndex !== null) {
-          entries[editIndex] = data;
-        } else {
-          entries.push(data);
-        }
+      const actions = document.createElement("div");
+      actions.className = "row-actions";
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "btn sm";
+      editBtn.textContent = "Edit";
+      editBtn.onclick = () => {
+        editIndex = idx;
+        fillForm(entries[idx]);
+      };
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "btn sm danger";
+      delBtn.textContent = "Delete";
+      delBtn.onclick = () => {
+        entries.splice(idx, 1);
         renderEntries();
         resetForm();
-      });
+      };
 
-      cancelEditBtn.addEventListener("click", resetForm);
-      downloadBtn.addEventListener("click", toExcel);
+      actions.appendChild(editBtn);
+      actions.appendChild(delBtn);
+      card.appendChild(grid);
+      card.appendChild(actions);
+      entriesList.appendChild(card);
+    });
+  }
 
-      // ====== Init ======
-      attachQ15Validation();
-      renderEntries();
-    </script>
+  // ====== Export to Excel ======
+  function toExcel() {
+    if (!entries.length) {
+      alert("No entries to download.");
+      return;
+    }
+
+    const flat = entries.map((obj) => {
+      const out = { SurveyYear: "2026", SurveyType: "SK" };
+      for (const [k, v] of Object.entries(obj))
+        out[k] = Array.isArray(v) ? v.join(", ") : v;
+      return out;
+    });
+
+    const cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
+    const normalized = flat.map((o) => {
+      const r = {};
+      cols.forEach((c) => (r[c] = o[c] ?? ""));
+      return r;
+    });
+
+    const ws = XLSX.utils.json_to_sheet(normalized, { header: cols });
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "ACTFL Entries");
+
+    const pad = (n) => String(n).padStart(2, "0");
+    const d = new Date();
+    const fname = `ACTFL_Submissions_${d.getFullYear()}${pad(
+      d.getMonth() + 1
+    )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
+    XLSX.writeFile(wb, fname);
+  }
+
+  // --- Unsaved data guard ---
+  let formDirty = false;
+  form.addEventListener("input", (e) => {
+    if (e.target && e.target.name && e.target.type !== "hidden") {
+      formDirty = true;
+    }
+  });
+
+  window.addEventListener("beforeunload", (e) => {
+    if (entries.length > 0 || formDirty) {
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+  });
+
+  // ====== Events ======
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = serializeForm(form);
+
+    for (const key of ["q15_1", "q15_2", "q15_3"]) {
+      const val = data[key];
+      if (val && !Q15_REGEX.test(val)) {
+        alert(`Q15: "${val}" is invalid. Please enter 01–72.`);
+        return;
+      }
+    }
+
+    if (editIndex !== null) {
+      entries[editIndex] = data;
+    } else {
+      entries.push(data);
+    }
+    renderEntries();
+    resetForm();
+  });
+
+  cancelEditBtn.addEventListener("click", resetForm);
+  downloadBtn.addEventListener("click", toExcel);
+
+  // ====== Init ======
+  attachQ15Validation();
+  renderEntries();
+</script>
+
   </body>
 </html>
+
 
 
 
