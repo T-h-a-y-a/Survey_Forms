@@ -17,11 +17,11 @@
           </button>
         </div>
       </div>
+
       <div class="datass">
         <label class="labels">SurveyYear:</label>
         <div class="static-data">
           <span>2026</span>
-          <!-- Static value -->
         </div>
       </div>
 
@@ -29,10 +29,11 @@
         <label class="labels">SurveyType:</label>
         <div class="static-data">
           <span>HX</span>
-          <!-- Static value -->
         </div>
       </div>
+
       <hr />
+
       <div class="datas-groupss">
         <div class="datas">
           <label class="labels"
@@ -73,11 +74,12 @@
         <input type="text" name="state" />
       </label>
 
-       <label class="labels"
+      <label class="labels"
         >Zip Code:
-        <input type="text" minlength="5"  maxlength="5" name="zipCode" />
+        <input type="text" minlength="5" maxlength="5" name="zipCode" />
       </label>
-       <label class="labels"
+
+      <label class="labels"
         >Zip4 Code:
         <input type="text" maxlength="4" name="zipCode4" />
       </label>
@@ -148,10 +150,10 @@
           </select>
         </div>
 
-        <!-- Year (kept as input) -->
-            <div class="dob-col">
+        <!-- Year -->
+        <div class="dob-col">
           <small><label for="birthYear">Year</label></small>
-         <select name="birthYear" id="birthYear">
+          <select name="birthYear" id="birthYear">
             <option value="">YYYY</option>
             <option value="2006">2006</option>
             <option value="2007">2007</option>
@@ -163,7 +165,6 @@
             <option value="2013">2013</option>
           </select>
         </div>
-      </div>
       </div>
 
       <div class="datas">
@@ -264,6 +265,7 @@
         <label><input type="checkbox" name="q5" value="B" />B</label>
         <label><input type="checkbox" name="q5" value="C" />C</label>
       </div>
+
       <label class="labels">Q6:</label>
       <div class="choices inline">
         <label><input type="checkbox" name="q6" value="A" />A</label>
@@ -326,6 +328,7 @@
         <label><input type="checkbox" name="q11" value="K" />K</label>
         <label><input type="checkbox" name="q11" value="L" />L</label>
       </div>
+
       <label class="labels">Q12:</label>
       <div class="choices inline">
         <label><input type="checkbox" name="q12" value="A" />A</label>
@@ -349,7 +352,6 @@
         <label><input type="checkbox" name="q12" value="S" />S</label>
       </div>
 
-      <!-- Q11 -->
       <label class="labels">Q13:</label>
       <div class="q13">
         <div class="q13-row">
@@ -366,7 +368,6 @@
         </div>
       </div>
 
-      <!-- Q14 -->
       <label class="labels">Q14:</label>
       <table class="q14" border="1">
         <colgroup>
@@ -446,347 +447,169 @@
           </tr>
         </tbody>
       </table>
-      <!-- Q15 -->
-      <label class="labels">Q15:</label>
-     <div id="q15" class="q15">
-  <div class="q15-row">
-    <input name="q15_1" class="qbox q15in" type="text"
-           inputmode="numeric" maxlength="2" placeholder="01"
-           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
-    <input name="q15_2" class="qbox q15in" type="text"
-           inputmode="numeric" maxlength="2" placeholder="01"
-           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
-    <input name="q15_3" class="qbox q15in" type="text"
-           inputmode="numeric" maxlength="2" placeholder="01"
-           pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$" />
-  </div>
-  <small class="muted">Enter two digits only (01–72).</small>
-</div>
 
-      <!-- Q16 -->
+      <label class="labels">Q15:</label>
+      <div id="q15" class="q15">
+        <div class="q15-row">
+          <input
+            name="q15_1"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            placeholder="01"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+          <input
+            name="q15_2"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            placeholder="01"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+          <input
+            name="q15_3"
+            class="qbox q15in"
+            type="text"
+            inputmode="numeric"
+            maxlength="2"
+            placeholder="01"
+            pattern="^(0[1-9]|[1-6][0-9]|7[0-2])$"
+          />
+        </div>
+        <small class="muted">Enter two digits only (01–72).</small>
+      </div>
+
       <label class="labels">Q16:</label>
       <div class="choices wrap">
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="A" />A</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="B" />B</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="C" />C</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="D" />D</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="E" />E</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="F" />F</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="G" />G</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="H" />H</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="I" />I</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="J" />J</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="K" />K</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="L" />L</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="M" />M</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="N" />N</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="O" />O</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="P" />P</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="Q" />Q</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="R" />R</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="S" />S</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q16" value="T" />T</label
-        >
+        <label class="opt"><input type="checkbox" name="q16" value="A" />A</label>
+        <label class="opt"><input type="checkbox" name="q16" value="B" />B</label>
+        <label class="opt"><input type="checkbox" name="q16" value="C" />C</label>
+        <label class="opt"><input type="checkbox" name="q16" value="D" />D</label>
+        <label class="opt"><input type="checkbox" name="q16" value="E" />E</label>
+        <label class="opt"><input type="checkbox" name="q16" value="F" />F</label>
+        <label class="opt"><input type="checkbox" name="q16" value="G" />G</label>
+        <label class="opt"><input type="checkbox" name="q16" value="H" />H</label>
+        <label class="opt"><input type="checkbox" name="q16" value="I" />I</label>
+        <label class="opt"><input type="checkbox" name="q16" value="J" />J</label>
+        <label class="opt"><input type="checkbox" name="q16" value="K" />K</label>
+        <label class="opt"><input type="checkbox" name="q16" value="L" />L</label>
+        <label class="opt"><input type="checkbox" name="q16" value="M" />M</label>
+        <label class="opt"><input type="checkbox" name="q16" value="N" />N</label>
+        <label class="opt"><input type="checkbox" name="q16" value="O" />O</label>
+        <label class="opt"><input type="checkbox" name="q16" value="P" />P</label>
+        <label class="opt"><input type="checkbox" name="q16" value="Q" />Q</label>
+        <label class="opt"><input type="checkbox" name="q16" value="R" />R</label>
+        <label class="opt"><input type="checkbox" name="q16" value="S" />S</label>
+        <label class="opt"><input type="checkbox" name="q16" value="T" />T</label>
       </div>
 
       <label class="labels">Q17:</label>
       <div class="choices wrap">
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="A" />A</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="B" />B</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="C" />C</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="D" />D</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="E" />E</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="F" />F</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="G" />G</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="H" />H</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="I" />I</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="J" />J</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="K" />K</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="L" />L</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="M" />M</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="N" />N</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="O" />O</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="P" />P</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q17" value="Q" />Q</label
-        >
+        <label class="opt"><input type="checkbox" name="q17" value="A" />A</label>
+        <label class="opt"><input type="checkbox" name="q17" value="B" />B</label>
+        <label class="opt"><input type="checkbox" name="q17" value="C" />C</label>
+        <label class="opt"><input type="checkbox" name="q17" value="D" />D</label>
+        <label class="opt"><input type="checkbox" name="q17" value="E" />E</label>
+        <label class="opt"><input type="checkbox" name="q17" value="F" />F</label>
+        <label class="opt"><input type="checkbox" name="q17" value="G" />G</label>
+        <label class="opt"><input type="checkbox" name="q17" value="H" />H</label>
+        <label class="opt"><input type="checkbox" name="q17" value="I" />I</label>
+        <label class="opt"><input type="checkbox" name="q17" value="J" />J</label>
+        <label class="opt"><input type="checkbox" name="q17" value="K" />K</label>
+        <label class="opt"><input type="checkbox" name="q17" value="L" />L</label>
+        <label class="opt"><input type="checkbox" name="q17" value="M" />M</label>
+        <label class="opt"><input type="checkbox" name="q17" value="N" />N</label>
+        <label class="opt"><input type="checkbox" name="q17" value="O" />O</label>
+        <label class="opt"><input type="checkbox" name="q17" value="P" />P</label>
+        <label class="opt"><input type="checkbox" name="q17" value="Q" />Q</label>
       </div>
 
-      <!-- Q18 -->
       <label class="labels">Q18:</label>
       <div class="datasss">
-          <div class="disc">
-            <label class="labels">18A:</label>
-            <div class="choices choicesss inline">
-              <label class="opt"
-          ><input type="checkbox" name="q18-a" value="A" />A</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="B" />B</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="C" />C</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="D" />D</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="E" />E</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="F" />F</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="G" />G</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="H" />H</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="I" />I</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="J" />J</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="K" />K</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="L" />L</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="M" />M</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="N" />N</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="O" />O</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="P" />P</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="Q" />Q</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="R" />R</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="S" />S</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="T" />T</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="U" />U</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="V" />V</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="W" />W</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="X" />X</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="Y" />Y</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-a" value="Z" />Z</label
-        >
-            </div>
-          </div>
-          <div class="disc">
-            <label class="labels">18B:</label>
-            <div class="choices choicesss inline">
-              <label class="opt"
-          ><input type="checkbox" name="q18-b" value="A" />A</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="B" />B</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="C" />C</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="D" />D</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="E" />E</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="F" />F</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="G" />G</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="H" />H</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="I" />I</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="J" />J</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="K" />K</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="L" />L</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="M" />M</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="N" />N</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="O" />O</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="P" />P</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="Q" />Q</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="R" />R</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="S" />S</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="T" />T</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="U" />U</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="V" />V</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="W" />W</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="X" />X</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="Y" />Y</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q18-b" value="Z" />Z</label
-        >
-            </div>
+        <div class="disc">
+          <label class="labels">18A:</label>
+          <div class="choices choicesss inline">
+            <label class="opt"><input type="checkbox" name="q18-a" value="A" />A</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="B" />B</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="C" />C</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="D" />D</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="E" />E</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="F" />F</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="G" />G</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="H" />H</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="I" />I</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="J" />J</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="K" />K</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="L" />L</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="M" />M</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="N" />N</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="O" />O</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="P" />P</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="Q" />Q</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="R" />R</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="S" />S</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="T" />T</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="U" />U</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="V" />V</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="W" />W</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="X" />X</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="Y" />Y</label>
+            <label class="opt"><input type="checkbox" name="q18-a" value="Z" />Z</label>
           </div>
         </div>
 
-      <!-- Q19 -->
-      <label class="labels">Q19:</label>
-      <div class="choices wrap">
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="A" />A</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="B" />B</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="C" />C</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="D" />D</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="E" />E</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="F" />F</label
-        >
-        <label class="opt"
-          ><input type="checkbox" name="q19" value="G" />G</label
-        >
+        <div class="disc">
+          <label class="labels">18B:</label>
+          <div class="choices choicesss inline">
+            <label class="opt"><input type="checkbox" name="q18-b" value="A" />A</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="B" />B</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="C" />C</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="D" />D</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="E" />E</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="F" />F</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="G" />G</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="H" />H</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="I" />I</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="J" />J</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="K" />K</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="L" />L</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="M" />M</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="N" />N</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="O" />O</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="P" />P</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="Q" />Q</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="R" />R</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="S" />S</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="T" />T</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="U" />U</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="V" />V</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="W" />W</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="X" />X</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="Y" />Y</label>
+            <label class="opt"><input type="checkbox" name="q18-b" value="Z" />Z</label>
+          </div>
+        </div>
       </div>
 
-      <!-- Q20 -->
+      <label class="labels">Q19:</label>
+      <div class="choices wrap">
+        <label class="opt"><input type="checkbox" name="q19" value="A" />A</label>
+        <label class="opt"><input type="checkbox" name="q19" value="B" />B</label>
+        <label class="opt"><input type="checkbox" name="q19" value="C" />C</label>
+        <label class="opt"><input type="checkbox" name="q19" value="D" />D</label>
+        <label class="opt"><input type="checkbox" name="q19" value="E" />E</label>
+        <label class="opt"><input type="checkbox" name="q19" value="F" />F</label>
+        <label class="opt"><input type="checkbox" name="q19" value="G" />G</label>
+      </div>
+
       <label class="labels"
         >Q20:
         <input type="text" name="q20" />
       </label>
 
-      <!-- Q21 -->
       <div class="datas">
         <label class="labels">Q21:</label>
         <div class="choices inline">
@@ -825,6 +648,48 @@
 
       let entries = [];
       let editIndex = null;
+
+      // ===== Start/End Time tracking (IST) =====
+      let startTimeIST = ""; // set when user starts typing
+      let endTimeIST = "";   // set on submit
+
+      const IST_TZ = "Asia/Kolkata";
+
+      function formatIST(date = new Date()) {
+        // Example output: 2026-01-28 11:05:33 IST
+        const parts = new Intl.DateTimeFormat("en-GB", {
+          timeZone: IST_TZ,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).formatToParts(date);
+
+        const get = (t) => parts.find(p => p.type === t)?.value || "";
+        const yyyy = get("year");
+        const mm = get("month");
+        const dd = get("day");
+        const hh = get("hour");
+        const mi = get("minute");
+        const ss = get("second");
+        return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss} IST`;
+      }
+
+      function maybeSetStartTime(e) {
+        // only first real typing/selecting in form sets start time
+        if (startTimeIST) return;
+        const t = e.target;
+        if (!t || !t.name) return;
+        if (t.type === "hidden") return;
+        startTimeIST = formatIST(new Date());
+      }
+
+      form.addEventListener("input", maybeSetStartTime, { capture: true });
+      form.addEventListener("change", maybeSetStartTime, { capture: true });
+
       // --- DOB dropdown logic (Month -> Day, with leap-year via Year) ---
       (function () {
         const monthSel = document.getElementById("birthMonth");
@@ -835,62 +700,72 @@
           return String(n).padStart(2, "0");
         }
         function daysInMonth(m, y) {
-          const yr = /^\d{4}$/.test(y) ? +y : 2001; // safe non-leap fallback
-          return new Date(yr, m, 0).getDate(); // m is 1..12
+          const yr = /^\d{4}$/.test(y) ? +y : 2001;
+          return new Date(yr, m, 0).getDate();
         }
         function refreshDays() {
-    if (!daySel) return;
-    daySel.innerHTML = '<option value="">DD</option>';
-    const m = parseInt(monthSel.value, 10);
-    if (!m) { daySel.disabled = true; return; }
-    const count = daysInMonth(m, yearInp.value);
-    for (let d = 1; d <= count; d++) {
-      const v = pad2(d);
-      const opt = document.createElement("option");
-      opt.value = v; opt.textContent = v;
-      daySel.appendChild(opt);
-    }
-    daySel.disabled = false;
-  }
+          if (!daySel) return;
+          daySel.innerHTML = '<option value="">DD</option>';
+          const m = parseInt(monthSel.value, 10);
+          if (!m) {
+            daySel.disabled = true;
+            return;
+          }
+          const count = daysInMonth(m, yearInp.value);
+          for (let d = 1; d <= count; d++) {
+            const v = pad2(d);
+            const opt = document.createElement("option");
+            opt.value = v;
+            opt.textContent = v;
+            daySel.appendChild(opt);
+          }
+          daySel.disabled = false;
+        }
 
-  if (monthSel && daySel && yearInp) {
-    monthSel.addEventListener("change", refreshDays);
-    yearInp.addEventListener("input", () => { if (monthSel.value === "02") refreshDays(); });
-    document.addEventListener("DOMContentLoaded", () => { if (monthSel.value) refreshDays(); });
-  }
-})();
+        if (monthSel && daySel && yearInp) {
+          monthSel.addEventListener("change", refreshDays);
+          // birthYear is a <select> now, so use "change"
+          yearInp.addEventListener("change", () => {
+            if (monthSel.value === "02") refreshDays();
+          });
+          document.addEventListener("DOMContentLoaded", () => {
+            if (monthSel.value) refreshDays();
+          });
+        }
+      })();
 
-// ====== Q15 validation: only 01–72 in three text boxes ======
-const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
+      // ====== Q15 validation: only 01–72 in three text boxes ======
+      const Q15_REGEX = /^(0[1-9]|[1-6][0-9]|7[0-2])$/;
 
-function attachQ15Validation() {
-  const inputs = document.querySelectorAll("#q15 .q15in");
-  inputs.forEach((inp) => {
-    // keep only digits, limit to 2, live validity
-    inp.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
-      const v = e.target.value;
-      if (!v) { e.target.setCustomValidity(""); return; }
-      e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
-    });
-    // auto-pad single digit to 0X on blur
-    inp.addEventListener("blur", (e) => {
-      const v = e.target.value;
-      if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
-      const ok = !e.target.value || Q15_REGEX.test(e.target.value);
-      e.target.setCustomValidity(ok ? "" : "Enter 01–72");
-    });
-  });
-}
+      function attachQ15Validation() {
+        const inputs = document.querySelectorAll("#q15 .q15in");
+        inputs.forEach((inp) => {
+          inp.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 2);
+            const v = e.target.value;
+            if (!v) {
+              e.target.setCustomValidity("");
+              return;
+            }
+            e.target.setCustomValidity(Q15_REGEX.test(v) ? "" : "Enter 01–72");
+          });
+          inp.addEventListener("blur", (e) => {
+            const v = e.target.value;
+            if (/^[1-9]$/.test(v)) e.target.value = "0" + v;
+            const ok = !e.target.value || Q15_REGEX.test(e.target.value);
+            e.target.setCustomValidity(ok ? "" : "Enter 01–72");
+          });
+        });
+      }
 
       // --- Serialize Form ---
       function serializeForm(f) {
         const data = {};
         const elements = Array.from(f.elements).filter((el) => el.name);
 
-        // Manually add static values for SurveyYear and SurveyType
-        data["SurveyYear"] = "2026"; // Static value for SurveyYear
-        data["SurveyType"] = "HX"; // Static value for SurveyType
+        // static values
+        data["SurveyYear"] = "2026";
+        data["SurveyType"] = "HX";
 
         elements.forEach((el) => {
           if (el.type === "checkbox") {
@@ -900,125 +775,141 @@ function attachQ15Validation() {
             el.tagName === "SELECT" ||
             ["text", "email", "number"].includes(el.type)
           ) {
-            data[el.name] = el.value.trim();
+            data[el.name] = (el.value || "").trim();
           }
         });
 
         return data;
       }
 
-      // --- Build Q15 (1..72) once ---
-      // function buildQ15() {
-      //   const box = document.getElementById("q15Checkboxes");
-      //   if (!box) return; // skip if that container is not used on this version
-      //   const frag = document.createDocumentFragment();
-      //   for (let i = 1; i <= 72; i++) {
-      //     const lbl = document.createElement("label");
-      //     lbl.className = "opt";
-      //     const cb = document.createElement("input");
-      //     cb.type = "checkbox";
-      //     cb.name = "q15";
-      //     cb.value = String(i);
-      //     lbl.appendChild(cb);
-      //     lbl.appendChild(document.createTextNode(String(i)));
-      //     frag.appendChild(lbl);
-      //   }
-      //   box.appendChild(frag);
-      // }
-
-      // --- Fill Form with Data ---
       // --- Unsaved data guard ---
-let formDirty = false;
+      let formDirty = false;
 
-// Mark form dirty on any user edit (ignore hidden fields)
-form.addEventListener("input", (e) => {
-  if (e.target && e.target.name && e.target.type !== "hidden") {
-    formDirty = true;
-  }
-});
+      form.addEventListener("input", (e) => {
+        if (e.target && e.target.name && e.target.type !== "hidden") {
+          formDirty = true;
+        }
+      });
 
-// Warn if the user tries to reload/close/navigate away
-window.addEventListener("beforeunload", (e) => {
-  if (entries.length > 0 || formDirty) {
-    e.preventDefault();           // Required for Chrome
-    e.returnValue = "";           // Shows a generic browser message
-    return "";                    // For older browsers
-  }
-});
+      window.addEventListener("beforeunload", (e) => {
+        if (entries.length > 0 || formDirty) {
+          e.preventDefault();
+          e.returnValue = "";
+          return "";
+        }
+      });
 
       function fillForm(data) {
-  form.reset();
-  for (const [name, value] of Object.entries(data)) {
-    const controls = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
-    if (!controls.length) continue;
-    const isArray = Array.isArray(value);
-    controls.forEach((ctrl) => {
-      if (ctrl.type === "checkbox") {
-        ctrl.checked = isArray ? value.includes(ctrl.value) : value === ctrl.value;
-      } else if (ctrl.tagName === "SELECT" || ["text", "email", "number", "hidden"].includes(ctrl.type)) {
-        ctrl.value = isArray ? value.join(", ") : value;
+        form.reset();
+        for (const [name, value] of Object.entries(data)) {
+          const controls = form.querySelectorAll(
+            `[name="${CSS.escape(name)}"]`
+          );
+          if (!controls.length) continue;
+          const isArray = Array.isArray(value);
+          controls.forEach((ctrl) => {
+            if (ctrl.type === "checkbox") {
+              ctrl.checked = isArray
+                ? value.includes(ctrl.value)
+                : value === ctrl.value;
+            } else if (
+              ctrl.tagName === "SELECT" ||
+              ["text", "email", "number", "hidden"].includes(ctrl.type)
+            ) {
+              ctrl.value = isArray ? value.join(", ") : value;
+            }
+          });
+        }
+        submitBtn.textContent = "Update";
+        cancelEditBtn.hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        formDirty = false;
       }
-    });
-  }
-  submitBtn.textContent = "Update";
-  cancelEditBtn.hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  formDirty = false;  
-}
 
-function resetForm() {
-  form.reset();
-  editIndex = null;
-  submitBtn.textContent = "Submit";
-  cancelEditBtn.hidden = true;
-  formDirty = false;  
-}
+      function resetForm() {
+        form.reset();
+        editIndex = null;
+        submitBtn.textContent = "Submit";
+        cancelEditBtn.hidden = true;
+        formDirty = false;
 
-// ====== Render entries list ======
-function renderEntries() {
-  entriesList.innerHTML = "";
-  if (!entries.length) {
-    entriesList.innerHTML = '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
-    return;
-  }
+        // reset timer for next new entry
+        startTimeIST = "";
+        endTimeIST = "";
+      }
 
-  entries.forEach((entry, idx) => {
-    const card = document.createElement("details");
-    card.className = "entry";
-    if (idx === entries.length - 1) card.open = true;
+      // ====== Render entries list ======
+      function renderEntries() {
+        entriesList.innerHTML = "";
+        if (!entries.length) {
+          entriesList.innerHTML =
+            '<p class="muted">No entries yet. Fill the form and click Submit.</p>';
+          return;
+        }
 
-    const title = document.createElement("summary");
-    const first = entry.firstName || "";
-    const last = entry.lastName || "";
-    title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
-    card.appendChild(title);
+        entries.forEach((entry, idx) => {
+          const card = document.createElement("details");
+          card.className = "entry";
+          if (idx === entries.length - 1) card.open = true;
 
-    const grid = document.createElement("div");
-    grid.className = "kv";
+          const title = document.createElement("summary");
+          const first = entry.firstName || "";
+          const last = entry.lastName || "";
+          title.textContent = `Entry #${idx + 1} — ${first} ${last}`.trim();
+          card.appendChild(title);
 
-    const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
-    for (const key of keys) {
-      const k = document.createElement("div"); k.className = "k"; k.textContent = key;
-      const v = document.createElement("div"); v.className = "v";
-      const val = Array.isArray(entry[key]) ? entry[key].join(", ") : entry[key];
-      v.textContent = val ?? "";
-      grid.appendChild(k); grid.appendChild(v);
-    }
+          const grid = document.createElement("div");
+          grid.className = "kv";
 
-    const actions = document.createElement("div");
-    actions.className = "row-actions";
-    const editBtn = document.createElement("button");
-    editBtn.type = "button"; editBtn.className = "btn sm"; editBtn.textContent = "Edit";
-    editBtn.onclick = () => { editIndex = idx; fillForm(entries[idx]); };
-    const delBtn = document.createElement("button");
-    delBtn.type = "button"; delBtn.className = "btn sm danger"; delBtn.textContent = "Delete";
-    delBtn.onclick = () => { entries.splice(idx, 1); renderEntries(); resetForm(); };
+          const keys = Object.keys(entry).sort((a, b) => a.localeCompare(b));
+          for (const key of keys) {
+            const k = document.createElement("div");
+            k.className = "k";
+            k.textContent = key;
 
-    actions.appendChild(editBtn); actions.appendChild(delBtn);
-    card.appendChild(grid); card.appendChild(actions);
-    entriesList.appendChild(card);
-  });
-}
+            const v = document.createElement("div");
+            v.className = "v";
+            const val = Array.isArray(entry[key])
+              ? entry[key].join(", ")
+              : entry[key];
+            v.textContent = val ?? "";
+            grid.appendChild(k);
+            grid.appendChild(v);
+          }
+
+          const actions = document.createElement("div");
+          actions.className = "row-actions";
+
+          const editBtn = document.createElement("button");
+          editBtn.type = "button";
+          editBtn.className = "btn sm";
+          editBtn.textContent = "Edit";
+          editBtn.onclick = () => {
+            editIndex = idx;
+            fillForm(entries[idx]);
+            // when editing, keep the original StartTime/EndTime in the entry
+            // startTimeIST/endTimeIST will be set again only if you start a new entry after reset
+            startTimeIST = entries[idx].StartTime || "";
+            endTimeIST = entries[idx].EndTime || "";
+          };
+
+          const delBtn = document.createElement("button");
+          delBtn.type = "button";
+          delBtn.className = "btn sm danger";
+          delBtn.textContent = "Delete";
+          delBtn.onclick = () => {
+            entries.splice(idx, 1);
+            renderEntries();
+            resetForm();
+          };
+
+          actions.appendChild(editBtn);
+          actions.appendChild(delBtn);
+          card.appendChild(grid);
+          card.appendChild(actions);
+          entriesList.appendChild(card);
+        });
+      }
 
       // --- Export Entries to Excel ---
       function toExcel() {
@@ -1027,20 +918,36 @@ function renderEntries() {
           return;
         }
 
+        // We want StartTime and EndTime AFTER q21 in Excel.
+        // So we create an ordered header list (cols) where we insert them right after 'q21'.
+        const afterKey = "q21";
+
         // Flatten arrays to strings for Excel
         const flat = entries.map((obj) => {
           const out = {};
-          // Manually include static values in the export
-          out["SurveyYear"] = "2026"; // Static value for SurveyYear
-          out["SurveyType"] = "HX"; // Static value for SurveyType
+          out["SurveyYear"] = "2026";
+          out["SurveyType"] = "HX";
           for (const [k, v] of Object.entries(obj)) {
             out[k] = Array.isArray(v) ? v.join(", ") : v;
           }
           return out;
         });
 
-        // Ensure stable columns (union of keys)
-        const cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
+        // Build base column union (stable)
+        let cols = Array.from(new Set(flat.flatMap((o) => Object.keys(o))));
+
+        // Ensure q21 exists in cols if any entry has it (normally yes)
+        if (!cols.includes(afterKey)) cols.push(afterKey);
+
+        // Remove StartTime/EndTime if already present then re-insert in correct position
+        cols = cols.filter((c) => c !== "StartTime" && c !== "EndTime");
+
+        const idx = cols.indexOf(afterKey);
+        const insertAt = idx >= 0 ? idx + 1 : cols.length;
+
+        cols.splice(insertAt, 0, "StartTime", "EndTime");
+
+        // Normalize rows to those columns
         const normalized = flat.map((o) => {
           const r = {};
           cols.forEach((c) => (r[c] = o[c] ?? ""));
@@ -1052,28 +959,55 @@ function renderEntries() {
         XLSX.utils.book_append_sheet(wb, ws, "N-STEM Entries");
 
         const pad = (n) => String(n).padStart(2, "0");
-        const d = new Date();
-        const fname = `N-STEM_Submissions_${d.getFullYear()}${pad(
-          d.getMonth() + 1
-        )}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.xlsx`;
 
+        // Filename date/time in IST too
+        const now = new Date();
+        const parts = new Intl.DateTimeFormat("en-GB", {
+          timeZone: IST_TZ,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).formatToParts(now);
+
+        const get = (t) => parts.find(p => p.type === t)?.value || "";
+        const yyyy = get("year");
+        const mm = get("month");
+        const dd = get("day");
+        const hh = get("hour");
+        const mi = get("minute");
+
+        const fname = `N-STEM_Submissions_${yyyy}${mm}${dd}_${hh}${mi}.xlsx`;
         XLSX.writeFile(wb, fname);
       }
 
       // --- Events ---
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        // If user submits without typing anything, still capture start time at submit moment
+        if (!startTimeIST) startTimeIST = formatIST(new Date());
+        endTimeIST = formatIST(new Date());
+
         const data = serializeForm(form);
 
-        console.log(data); // This will log the serialized data to the console. Ensure SurveyYear and SurveyType are there.
+        // Add StartTime / EndTime into the entry object
+        data["StartTime"] = startTimeIST;
+        data["EndTime"] = endTimeIST;
 
         if (editIndex !== null) {
+          // update
           entries[editIndex] = data;
         } else {
+          // new entry
           entries.push(data);
         }
-        renderEntries(); // Re-render the entries list to display updated data
-        resetForm(); // Reset the form for the next entry
+
+        renderEntries();
+        resetForm();
       });
 
       cancelEditBtn.addEventListener("click", resetForm);
@@ -1085,7 +1019,3 @@ function renderEntries() {
     </script>
   </body>
 </html>
-
-
-
-
